@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ToDoFeature
 
 @main
 struct ToDoListApp: App {

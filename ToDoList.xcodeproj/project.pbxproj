@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E9C1BA172F39CC1C00099FEE /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA162F39CC1C00099FEE /* DesignSystem */; };
+		E9C1BA1D2F39CC2800099FEE /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1C2F39CC2800099FEE /* Logging */; };
+		E9C1BA272F39CC4800099FEE /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA262F39CC4800099FEE /* Utilities */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		E94855952F34CDA900368F8B /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -16,6 +22,11 @@
 			path = ToDoList;
 			sourceTree = "<group>";
 		};
+		E97CE3672F362E18006ECA6B /* Modules */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Modules;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,6 +34,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C1BA272F39CC4800099FEE /* Utilities in Frameworks */,
+				E9C1BA172F39CC1C00099FEE /* DesignSystem in Frameworks */,
+				E9C1BA1D2F39CC2800099FEE /* Logging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,7 +46,9 @@
 		E948558C2F34CDA900368F8B = {
 			isa = PBXGroup;
 			children = (
+				E97CE3672F362E18006ECA6B /* Modules */,
 				E94855972F34CDA900368F8B /* ToDoList */,
+				E9C1BA132F39CC1800099FEE /* Frameworks */,
 				E94855962F34CDA900368F8B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +59,13 @@
 				E94855952F34CDA900368F8B /* ToDoList.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E9C1BA132F39CC1800099FEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -62,9 +85,13 @@
 			);
 			fileSystemSynchronizedGroups = (
 				E94855972F34CDA900368F8B /* ToDoList */,
+				E97CE3672F362E18006ECA6B /* Modules */,
 			);
 			name = ToDoList;
 			packageProductDependencies = (
+				E9C1BA162F39CC1C00099FEE /* DesignSystem */,
+				E9C1BA1C2F39CC2800099FEE /* Logging */,
+				E9C1BA262F39CC4800099FEE /* Utilities */,
 			);
 			productName = ToDoList;
 			productReference = E94855952F34CDA900368F8B /* ToDoList.app */;
@@ -344,6 +371,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E9C1BA162F39CC1C00099FEE /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
+		};
+		E9C1BA1C2F39CC2800099FEE /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Logging;
+		};
+		E9C1BA262F39CC4800099FEE /* Utilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Utilities;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E948558D2F34CDA900368F8B /* Project object */;
 }
