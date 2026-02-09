@@ -14,6 +14,7 @@
 		E9C1BA1D2F39CC2800099FEE /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1C2F39CC2800099FEE /* Logging */; };
 		E9C1BA1F2F39CC2C00099FEE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1E2F39CC2C00099FEE /* Networking */; };
 		E9C1BA212F39CC3000099FEE /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA202F39CC3000099FEE /* Repositories */; };
+		E9C1BA232F39CC3F00099FEE /* ToDoFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA222F39CC3F00099FEE /* ToDoFeature */; };
 		E9C1BA252F39CC4400099FEE /* ToDoUseCases in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA242F39CC4400099FEE /* ToDoUseCases */; };
 		E9C1BA272F39CC4800099FEE /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA262F39CC4800099FEE /* Utilities */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 				E9C1BA272F39CC4800099FEE /* Utilities in Frameworks */,
 				E9C1BA152F39CC1800099FEE /* DataInterface in Frameworks */,
 				E9C1BA1B2F39CC2400099FEE /* LocalStores in Frameworks */,
+				E9C1BA232F39CC3F00099FEE /* ToDoFeature in Frameworks */,
 				E9C1BA252F39CC4400099FEE /* ToDoUseCases in Frameworks */,
 				E9C1BA172F39CC1C00099FEE /* DesignSystem in Frameworks */,
 				E9C1BA1D2F39CC2800099FEE /* Logging in Frameworks */,
@@ -108,6 +110,7 @@
 				E9C1BA1C2F39CC2800099FEE /* Logging */,
 				E9C1BA1E2F39CC2C00099FEE /* Networking */,
 				E9C1BA202F39CC3000099FEE /* Repositories */,
+				E9C1BA222F39CC3F00099FEE /* ToDoFeature */,
 				E9C1BA242F39CC4400099FEE /* ToDoUseCases */,
 				E9C1BA262F39CC4800099FEE /* Utilities */,
 			);
@@ -418,6 +421,10 @@
 		E9C1BA202F39CC3000099FEE /* Repositories */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Repositories;
+		};
+		E9C1BA222F39CC3F00099FEE /* ToDoFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ToDoFeature;
 		};
 		E9C1BA242F39CC4400099FEE /* ToDoUseCases */ = {
 			isa = XCSwiftPackageProductDependency;
