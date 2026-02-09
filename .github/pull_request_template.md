@@ -1,31 +1,31 @@
 
-### Пользовательские истории
- - [X] название
- - [X] или ссылка
+### User stories
+ - [X] point
+ - [X] or gitHub link
 
 
-### Бизнес логика и внутренние модули
- - [X] название
- - [X] или ссылка
+### Core & Business logic
+ - [X] point
+ - [X] or gitHub link
 
 
-### Исправление багов
- - [X] название
- - [X] или ссылка
+### Bug fixing
+ - [X] point
+ - [X] or gitHub link
 
 
-### Уменьшение технического долга
- - [X] название 
- - [X] или ссылка
+### Reduce technical debt
+ - [X] point
+ - [X] or gitHub link
 
   
 
 > [!TIP]
-> В названии задач могут быть следующие коды  
-> [UС] - use cases  
-> [CORE] - core modules & business logic  
+> Should start PR's name with one of the next codes:  
+> [US] - user stories  
+> [CORE] - core & business logic  
 > [BUG] - bug fix  
-> [TB] - technical debt (в конце может быть уточняющий код или название модуля/системы)  
+> [TB] - technical debt    
 
 
 
@@ -33,7 +33,5 @@
 
 Key information for GitHub Actions:  
 Close #  
-Close #  
-Fix #  
 Fix #  
     
