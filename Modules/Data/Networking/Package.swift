@@ -12,9 +12,21 @@ let package = Package(
             targets: ["Networking"]
         ),
     ],
+    dependencies: [
+        .package(path: "../../Core/Logging"),
+        .package(path: "../../Core/Utilities"),
+        .package(path: "../../Domain/DomainInterface"),
+        .package(path: "../DataInterface"),
+    ],
     targets: [
         .target(
             name: "Networking",
+            dependencies: [
+                "Logging",
+                "Utilities",
+                "DomainInterface",
+                "DataInterface",
+            ],
             path: "Sources/Networking",
             swiftSettings: [.swiftLanguageMode(.v5)],
         ),

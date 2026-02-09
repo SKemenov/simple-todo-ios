@@ -12,9 +12,19 @@ let package = Package(
             targets: ["ToDoUseCases"]
         ),
     ],
+    dependencies: [
+        .package(path: "../../Core/Logging"),
+        .package(path: "../../Core/Utilities"),
+        .package(path: "../DomainInterface"),
+    ],
     targets: [
         .target(
             name: "ToDoUseCases",
+            dependencies: [
+                "Logging",
+                "Utilities",
+                "DomainInterface",
+            ],
             path: "Sources/ToDoUseCases",
             swiftSettings: [.swiftLanguageMode(.v5)],
         ),

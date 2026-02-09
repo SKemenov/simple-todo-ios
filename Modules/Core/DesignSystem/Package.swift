@@ -12,9 +12,15 @@ let package = Package(
             targets: ["DesignSystem"]
         ),
     ],
+    dependencies: [
+        .package(path: "../Utilities"),
+    ],
     targets: [
         .target(
             name: "DesignSystem",
+            dependencies: [
+                "Utilities",
+            ],
             path: "Sources/DesignSystem",
             resources: [
             ],

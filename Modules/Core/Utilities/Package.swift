@@ -12,9 +12,15 @@ let package = Package(
             targets: ["Utilities"]
         ),
     ],
+    dependencies: [
+        .package(path: "../Logging"),
+    ],
     targets: [
         .target(
             name: "Utilities",
+            dependencies: [
+                "Logging",
+            ],
             path: "Sources/Utilities",
             swiftSettings: [.swiftLanguageMode(.v5)],
         ),

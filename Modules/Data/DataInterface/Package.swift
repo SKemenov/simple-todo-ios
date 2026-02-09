@@ -12,9 +12,19 @@ let package = Package(
             targets: ["DataInterface"]
         ),
     ],
+    dependencies: [
+        .package(path: "../../Core/Logging"),
+        .package(path: "../../Core/Utilities"),
+        .package(path: "../../Domain/DomainInterface"),
+    ],
     targets: [
         .target(
             name: "DataInterface",
+            dependencies: [
+                "Logging",
+                "Utilities",
+                "DomainInterface",
+            ],
             path: "Sources/DataInterface",
             swiftSettings: [.swiftLanguageMode(.v5)],
         ),

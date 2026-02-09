@@ -12,9 +12,21 @@ let package = Package(
             targets: ["ToDoFeature"]
         ),
     ],
+    dependencies: [
+        .package(path: "../../Core/Logging"),
+        .package(path: "../../Core/Utilities"),
+        .package(path: "../../Core/DesignSystem"),
+        .package(path: "../../Domain/DomainInterface"),
+    ],
     targets: [
         .target(
             name: "ToDoFeature",
+            dependencies: [
+                "Logging",
+                "Utilities",
+                "DesignSystem",
+                "DomainInterface",
+            ],
             path: "Sources/TodoFeature",
             swiftSettings: [.swiftLanguageMode(.v5)],
         ),
