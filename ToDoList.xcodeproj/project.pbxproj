@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		E9C1BA152F39CC1800099FEE /* DataInterface in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA142F39CC1800099FEE /* DataInterface */; };
 		E9C1BA172F39CC1C00099FEE /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA162F39CC1C00099FEE /* DesignSystem */; };
+		E9C1BA192F39CC2000099FEE /* DomainInterface in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA182F39CC2000099FEE /* DomainInterface */; };
 		E9C1BA1B2F39CC2400099FEE /* LocalStores in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1A2F39CC2400099FEE /* LocalStores */; };
 		E9C1BA1D2F39CC2800099FEE /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1C2F39CC2800099FEE /* Logging */; };
 		E9C1BA1F2F39CC2C00099FEE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1E2F39CC2C00099FEE /* Networking */; };
 		E9C1BA212F39CC3000099FEE /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA202F39CC3000099FEE /* Repositories */; };
+		E9C1BA252F39CC4400099FEE /* ToDoUseCases in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA242F39CC4400099FEE /* ToDoUseCases */; };
 		E9C1BA272F39CC4800099FEE /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA262F39CC4800099FEE /* Utilities */; };
 /* End PBXBuildFile section */
 
@@ -40,9 +42,11 @@
 			files = (
 				E9C1BA212F39CC3000099FEE /* Repositories in Frameworks */,
 				E9C1BA1F2F39CC2C00099FEE /* Networking in Frameworks */,
+				E9C1BA192F39CC2000099FEE /* DomainInterface in Frameworks */,
 				E9C1BA272F39CC4800099FEE /* Utilities in Frameworks */,
 				E9C1BA152F39CC1800099FEE /* DataInterface in Frameworks */,
 				E9C1BA1B2F39CC2400099FEE /* LocalStores in Frameworks */,
+				E9C1BA252F39CC4400099FEE /* ToDoUseCases in Frameworks */,
 				E9C1BA172F39CC1C00099FEE /* DesignSystem in Frameworks */,
 				E9C1BA1D2F39CC2800099FEE /* Logging in Frameworks */,
 			);
@@ -99,10 +103,12 @@
 			packageProductDependencies = (
 				E9C1BA142F39CC1800099FEE /* DataInterface */,
 				E9C1BA162F39CC1C00099FEE /* DesignSystem */,
+				E9C1BA182F39CC2000099FEE /* DomainInterface */,
 				E9C1BA1A2F39CC2400099FEE /* LocalStores */,
 				E9C1BA1C2F39CC2800099FEE /* Logging */,
 				E9C1BA1E2F39CC2C00099FEE /* Networking */,
 				E9C1BA202F39CC3000099FEE /* Repositories */,
+				E9C1BA242F39CC4400099FEE /* ToDoUseCases */,
 				E9C1BA262F39CC4800099FEE /* Utilities */,
 			);
 			productName = ToDoList;
@@ -393,6 +399,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;
 		};
+		E9C1BA182F39CC2000099FEE /* DomainInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DomainInterface;
+		};
 		E9C1BA1A2F39CC2400099FEE /* LocalStores */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LocalStores;
@@ -408,6 +418,10 @@
 		E9C1BA202F39CC3000099FEE /* Repositories */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Repositories;
+		};
+		E9C1BA242F39CC4400099FEE /* ToDoUseCases */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ToDoUseCases;
 		};
 		E9C1BA262F39CC4800099FEE /* Utilities */ = {
 			isa = XCSwiftPackageProductDependency;
