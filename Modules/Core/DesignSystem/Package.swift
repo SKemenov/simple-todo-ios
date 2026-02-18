@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "DesignSystem",
+    defaultLocalization: "ru",
     platforms: [.iOS(.v16)],
     products: [
         .library(
@@ -23,6 +24,7 @@ let package = Package(
             ],
             path: "Sources/DesignSystem",
             resources: [
+                .process("Resources/"),
             ],
             swiftSettings: [.swiftLanguageMode(.v5)],
         ),
