@@ -1,10 +1,11 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "ToDoFeature",
+    defaultLocalization: "ru",
     platforms: [.iOS(.v16)],
     products: [
         .library(
@@ -28,7 +29,9 @@ let package = Package(
                 "DomainInterface",
             ],
             path: "Sources/TodoFeature",
-            swiftSettings: [.swiftLanguageMode(.v5)],
+            resources: [
+                .process("Resources/"),
+            ],
         ),
         .testTarget(
             name: "ToDoFeatureTests",
