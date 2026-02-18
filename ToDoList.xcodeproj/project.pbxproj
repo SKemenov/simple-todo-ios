@@ -23,15 +23,28 @@
 		E94855952F34CDA900368F8B /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		E94855972F34CDA900368F8B /* ToDoList */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ToDoList;
-			sourceTree = "<group>";
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E994F06B2F46260E001C0B89 /* Exceptions for "ToDoList" folder in "ToDoList" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = E94855942F34CDA900368F8B /* ToDoList */;
 		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
 		E97CE3672F362E18006ECA6B /* Modules */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		E9B398292F461D2E003A76F2 /* ToDoList */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E994F06B2F46260E001C0B89 /* Exceptions for "ToDoList" folder in "ToDoList" target */,
+			);
+			path = ToDoList;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -60,10 +73,10 @@
 		E948558C2F34CDA900368F8B = {
 			isa = PBXGroup;
 			children = (
-				E97CE3672F362E18006ECA6B /* Modules */,
-				E94855972F34CDA900368F8B /* ToDoList */,
 				E9C1BA132F39CC1800099FEE /* Frameworks */,
+				E97CE3672F362E18006ECA6B /* Modules */,
 				E94855962F34CDA900368F8B /* Products */,
+				E9B398292F461D2E003A76F2 /* ToDoList */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,8 +111,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E94855972F34CDA900368F8B /* ToDoList */,
 				E97CE3672F362E18006ECA6B /* Modules */,
+				E9B398292F461D2E003A76F2 /* ToDoList */,
 			);
 			name = ToDoList;
 			packageProductDependencies = (
@@ -134,11 +147,12 @@
 				};
 			};
 			buildConfigurationList = E94855902F34CDA900368F8B /* Build configuration list for PBXProject "ToDoList" */;
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = E948558C2F34CDA900368F8B;
 			minimizedProjectReferenceProxies = 1;
@@ -226,7 +240,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -284,7 +298,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -304,10 +318,12 @@
 				DEVELOPMENT_TEAM = 3LKWW87KA9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToDoList/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
@@ -342,10 +358,12 @@
 				DEVELOPMENT_TEAM = 3LKWW87KA9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToDoList/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
