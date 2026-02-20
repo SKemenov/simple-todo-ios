@@ -1,5 +1,5 @@
 //
-//  DSEmptyStateView.swift
+//  DSEmptyState.swift
 //  DesignSystem
 //
 //  Created by Sergey Kemenov on 08.02.2026.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct DSEmptyStateView: View {
+public struct DSEmptyState: View {
     private let emptyTitle: LocalizedStringKey = "No ToDos yet"
     private let emptyTap: LocalizedStringKey = "Tap the"
     private let emptyDescription: LocalizedStringKey = "button to create your first ToDo"
@@ -37,7 +37,7 @@ public struct DSEmptyStateView: View {
     }
 }
 
-private extension DSEmptyStateView {
+private extension DSEmptyState {
     var icon: some View {
         Image.DS.Icons.empty
             .font(.designSystem(.iconLarge))
@@ -69,7 +69,7 @@ private extension DSEmptyStateView {
     }
 }
 #Preview {
-    DSEmptyStateView()
+    DSEmptyState()
         .preferredColorScheme(.dark)
-
+        .environment(\.locale, Locale(identifier: "RU"))
 }

@@ -1,5 +1,5 @@
 //
-//  DSErrorView.swift
+//  DSToggle.swift
 //  DesignSystem
 //
 //  Created by Sergey Kemenov on 08.02.2026.

@@ -38,6 +38,12 @@
     },
     "Not Found" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Found"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -91,6 +97,12 @@
     },
     "Try to search another one" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try to search another one"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",

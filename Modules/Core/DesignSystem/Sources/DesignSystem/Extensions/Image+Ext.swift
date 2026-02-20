@@ -17,7 +17,7 @@ extension Image {
     }
 }
 
-extension Image.DS.Icons {
+extension Image.DS.Icons: CaseIterable {
     /// SF symbol for "checkmark.circle"
     public static let complete: Image = Image(systemName: .DS.Icons.complete)
 

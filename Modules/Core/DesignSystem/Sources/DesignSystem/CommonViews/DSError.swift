@@ -1,5 +1,5 @@
 //
-//  DSErrorView.swift
+//  DSError.swift
 //  DesignSystem
 //
 //  Created by Sergey Kemenov on 08.02.2026.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct DSErrorView: View {
+public struct DSError: View {
     let message: String
     let retry: () -> Void
 
@@ -27,9 +27,12 @@ public struct DSErrorView: View {
                 .foregroundColor(.designSystem(.text(.primary)))
                 .multilineTextAlignment(.center)
 
-            Button("Retry", action: retry)
+            Button(action: retry) {
+                Text("Retry", bundle: .module)
+            }
                 .buttonStyle(.bordered)
                 .foregroundColor(.designSystem(.text(.accent)))
+                .padding()
         }
         .padding()
         .background(.designSystem(.background(.primary)))
@@ -37,6 +40,7 @@ public struct DSErrorView: View {
 }
 
 #Preview {
-    DSErrorView(message: "Sample Error", retry: { print("button tapped") })
+    DSError(message: "Sample Error", retry: { print("button tapped") })
         .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "RU"))
 }
