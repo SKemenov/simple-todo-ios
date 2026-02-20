@@ -1,0 +1,89 @@
+{
+  "configurations" : [
+    {
+      "id" : "8BF593C1-BCC6-4F9E-8A5D-80D4FF204FFC",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "language" : "ru",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Data\/DataInterface",
+        "identifier" : "DataInterfaceTests",
+        "name" : "DataInterfaceTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Core\/DesignSystem",
+        "identifier" : "DesignSystemTests",
+        "name" : "DesignSystemTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Core\/Utilities",
+        "identifier" : "UtilitiesTests",
+        "name" : "UtilitiesTests"
+      }
+    },
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:Modules\/Data\/LocalStores",
+        "identifier" : "LocalStoresTests",
+        "name" : "LocalStoresTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Core\/Logging",
+        "identifier" : "LoggingTests",
+        "name" : "LoggingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Domain\/DomainInterface",
+        "identifier" : "DomainInterfaceTests",
+        "name" : "DomainInterfaceTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Presentation\/ToDoFeature",
+        "identifier" : "ToDoFeatureTests",
+        "name" : "ToDoFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Data\/Networking",
+        "identifier" : "NetworkingTests",
+        "name" : "NetworkingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Data\/Repositories",
+        "identifier" : "RepositoriesTests",
+        "name" : "RepositoriesTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Domain\/ToDoUseCases",
+        "identifier" : "ToDoUseCasesTests",
+        "name" : "ToDoUseCasesTests"
+      }
+    }
+  ],
+  "version" : 1
+}

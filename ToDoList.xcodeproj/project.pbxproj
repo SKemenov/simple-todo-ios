@@ -6,13 +6,64 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E9AD506E2F4894DE0004ADF6 /* TestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = E9AD506D2F4894DE0004ADF6 /* TestPlan.xctestplan */; };
+		E9C1BA152F39CC1800099FEE /* DataInterface in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA142F39CC1800099FEE /* DataInterface */; };
+		E9C1BA172F39CC1C00099FEE /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA162F39CC1C00099FEE /* DesignSystem */; };
+		E9C1BA192F39CC2000099FEE /* DomainInterface in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA182F39CC2000099FEE /* DomainInterface */; };
+		E9C1BA1B2F39CC2400099FEE /* LocalStores in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1A2F39CC2400099FEE /* LocalStores */; };
+		E9C1BA1D2F39CC2800099FEE /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1C2F39CC2800099FEE /* Logging */; };
+		E9C1BA1F2F39CC2C00099FEE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA1E2F39CC2C00099FEE /* Networking */; };
+		E9C1BA212F39CC3000099FEE /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA202F39CC3000099FEE /* Repositories */; };
+		E9C1BA232F39CC3F00099FEE /* ToDoFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA222F39CC3F00099FEE /* ToDoFeature */; };
+		E9C1BA252F39CC4400099FEE /* ToDoUseCases in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA242F39CC4400099FEE /* ToDoUseCases */; };
+		E9C1BA272F39CC4800099FEE /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA262F39CC4800099FEE /* Utilities */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E9ABA59F2F4833D7002F2FE1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		E94855952F34CDA900368F8B /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9AD506D2F4894DE0004ADF6 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestPlan.xctestplan; path = Tests/TestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E994F06B2F46260E001C0B89 /* Exceptions for "ToDoList" folder in "ToDoList" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = E94855942F34CDA900368F8B /* ToDoList */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E94855972F34CDA900368F8B /* ToDoList */ = {
+		E97CE3672F362E18006ECA6B /* Modules */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		E983AE262F4747440030051E /* Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		E9B398292F461D2E003A76F2 /* ToDoList */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E994F06B2F46260E001C0B89 /* Exceptions for "ToDoList" folder in "ToDoList" target */,
+			);
 			path = ToDoList;
 			sourceTree = "<group>";
 		};
@@ -23,6 +74,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C1BA212F39CC3000099FEE /* Repositories in Frameworks */,
+				E9C1BA1F2F39CC2C00099FEE /* Networking in Frameworks */,
+				E9C1BA192F39CC2000099FEE /* DomainInterface in Frameworks */,
+				E9C1BA272F39CC4800099FEE /* Utilities in Frameworks */,
+				E9C1BA152F39CC1800099FEE /* DataInterface in Frameworks */,
+				E9C1BA1B2F39CC2400099FEE /* LocalStores in Frameworks */,
+				E9C1BA232F39CC3F00099FEE /* ToDoFeature in Frameworks */,
+				E9C1BA252F39CC4400099FEE /* ToDoUseCases in Frameworks */,
+				E9C1BA172F39CC1C00099FEE /* DesignSystem in Frameworks */,
+				E9C1BA1D2F39CC2800099FEE /* Logging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,8 +93,12 @@
 		E948558C2F34CDA900368F8B = {
 			isa = PBXGroup;
 			children = (
-				E94855972F34CDA900368F8B /* ToDoList */,
+				E9AD506D2F4894DE0004ADF6 /* TestPlan.xctestplan */,
+				E983AE262F4747440030051E /* Tests */,
+				E9C1BA132F39CC1800099FEE /* Frameworks */,
+				E97CE3672F362E18006ECA6B /* Modules */,
 				E94855962F34CDA900368F8B /* Products */,
+				E9B398292F461D2E003A76F2 /* ToDoList */,
 			);
 			sourceTree = "<group>";
 		};
@@ -43,6 +108,13 @@
 				E94855952F34CDA900368F8B /* ToDoList.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E9C1BA132F39CC1800099FEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,16 +127,29 @@
 				E94855912F34CDA900368F8B /* Sources */,
 				E94855922F34CDA900368F8B /* Frameworks */,
 				E94855932F34CDA900368F8B /* Resources */,
+				E9ABA59F2F4833D7002F2FE1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E94855972F34CDA900368F8B /* ToDoList */,
+				E97CE3672F362E18006ECA6B /* Modules */,
+				E983AE262F4747440030051E /* Tests */,
+				E9B398292F461D2E003A76F2 /* ToDoList */,
 			);
 			name = ToDoList;
 			packageProductDependencies = (
+				E9C1BA142F39CC1800099FEE /* DataInterface */,
+				E9C1BA162F39CC1C00099FEE /* DesignSystem */,
+				E9C1BA182F39CC2000099FEE /* DomainInterface */,
+				E9C1BA1A2F39CC2400099FEE /* LocalStores */,
+				E9C1BA1C2F39CC2800099FEE /* Logging */,
+				E9C1BA1E2F39CC2C00099FEE /* Networking */,
+				E9C1BA202F39CC3000099FEE /* Repositories */,
+				E9C1BA222F39CC3F00099FEE /* ToDoFeature */,
+				E9C1BA242F39CC4400099FEE /* ToDoUseCases */,
+				E9C1BA262F39CC4800099FEE /* Utilities */,
 			);
 			productName = ToDoList;
 			productReference = E94855952F34CDA900368F8B /* ToDoList.app */;
@@ -86,11 +171,12 @@
 				};
 			};
 			buildConfigurationList = E94855902F34CDA900368F8B /* Build configuration list for PBXProject "ToDoList" */;
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = E948558C2F34CDA900368F8B;
 			minimizedProjectReferenceProxies = 1;
@@ -109,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9AD506E2F4894DE0004ADF6 /* TestPlan.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +265,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -236,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -256,10 +343,12 @@
 				DEVELOPMENT_TEAM = 3LKWW87KA9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToDoList/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
@@ -294,10 +383,12 @@
 				DEVELOPMENT_TEAM = 3LKWW87KA9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToDoList/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
@@ -344,6 +435,49 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E9C1BA142F39CC1800099FEE /* DataInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataInterface;
+		};
+		E9C1BA162F39CC1C00099FEE /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
+		};
+		E9C1BA182F39CC2000099FEE /* DomainInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DomainInterface;
+		};
+		E9C1BA1A2F39CC2400099FEE /* LocalStores */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocalStores;
+		};
+		E9C1BA1C2F39CC2800099FEE /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Logging;
+		};
+		E9C1BA1E2F39CC2C00099FEE /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Networking;
+		};
+		E9C1BA202F39CC3000099FEE /* Repositories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Repositories;
+		};
+		E9C1BA222F39CC3F00099FEE /* ToDoFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ToDoFeature;
+		};
+		E9C1BA242F39CC4400099FEE /* ToDoUseCases */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ToDoUseCases;
+		};
+		E9C1BA262F39CC4800099FEE /* Utilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Utilities;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E948558D2F34CDA900368F8B /* Project object */;
 }
