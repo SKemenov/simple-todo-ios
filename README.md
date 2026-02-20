@@ -1,4 +1,4 @@
-[English version](#ToDoList-iOS-app)
+[English version](#Screenshots)
 
 ## ToDoList iOS
 
@@ -33,14 +33,6 @@ ToDoList - демо приложение для ведения списка де
 - [x] Подключение зависимостей через DI контейнер
 - [x] Моковые координатор и DI контейнер для корректной работы Swift Preview
 
-
-![List screen](vendors/RocketSim_Screenshot_iPhone_List.png)
-![Context menu](vendors/RocketSim_Screenshot_iPhone_ContextMenu.png)
-![Task detail](vendors/RocketSim_Screenshot_iPhone_Detail.png)
-![Empty list](vendors/RocketSim_Screenshot_iPhone_EmptyList.png)
-![Root screen](vendors/RocketSim_Screenshot_iPhone_RootScreen.png)
-
-
 ## Требования заказчика
 [Дизайн приложения (Figma)](https://www.figma.com/design/ElcIDP3PIp5iOE4dCtPGmd/Задачи?node-id=0-1&p=f&t=3Xts3fHljC38qNLI-0)
 [Техническое задание](https://disk.360.yandex.ru/i/HiTz0LSbJfFWwA)
@@ -55,8 +47,6 @@ ToDoList - демо приложение для ведения списка де
 | Платформа                     | iPhone                     |
 | Ориентация устройства         | Портрет (только)           |
 | Шрифт                         | Системный                  | 
-
-
 
 
 ### Стек технологий 
@@ -83,7 +73,16 @@ ToDoList - демо приложение для ведения списка де
 ### Автор 
 [Сергей Кеменов](https://github.com/SKemenov)
 
-[В начало](#ToDoList-iOS)
+## Screenshots
+
+<p align="center">
+  <img src="vendors/RocketSim_Screenshot_iPhone_List.png"       width="19%"/> 
+  <img src="vendors/RocketSim_Screenshot_iPhone_ContextMenu.png" width="19%"/> 
+  <img src="vendors/RocketSim_Screenshot_iPhone_Detail.png"      width="19%"/> 
+  <img src="vendors/RocketSim_Screenshot_iPhone_EmptyList.png"   width="19%"/> 
+  <img src="vendors/RocketSim_Screenshot_iPhone_RootScreen.png"  width="19%"/>
+</p>
+
 
 
 # ToDoList iOS app
@@ -117,14 +116,6 @@ ToDoList is a demo iOS application for managing a task list with support for add
 - [x] App **localization**: English + Russian
 - [x] **Dependency Injection** container
 - [x] Mock coordinator and DI container for correct **SwiftUI Previews**
-
-## Screenshots
-
-![List screen](vendors/RocketSim_Screenshot_iPhone_List.png)
-![Context menu](vendors/RocketSim_Screenshot_iPhone_ContextMenu.png)
-![Task detail](vendors/RocketSim_Screenshot_iPhone_Detail.png)
-![Empty list](vendors/RocketSim_Screenshot_iPhone_EmptyList.png)
-![Root screen](vendors/RocketSim_Screenshot_iPhone_RootScreen.png)
 
 ## Customer Requirements / References
 
