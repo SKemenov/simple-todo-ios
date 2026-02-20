@@ -14,7 +14,7 @@ public final class ToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
     private let responseValidator = HTTPResponseValidator()
 
     public init() {
-        Logger.network.info("\(Current.logHeader()) Started")
+        Logger.network.info("\(String.logHeader()) Started")
     }
     
     public func fetchAllToDos() async throws -> DTOModel.ToDos {
@@ -22,7 +22,7 @@ public final class ToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
         let responseData = try await sendRequest(request)
         let model = try Current.decoder.decode(DTOModel.ToDos.self, from: responseData)
         Logger.network.info(
-            "\(Current.logHeader()) Get \(model.todos.count) records, last model id \(model.todos.last?.id ?? -1)"
+            "\(String.logHeader()) Get \(model.todos.count) records, last model id \(model.todos.last?.id ?? -1)"
         )
         return model
     }
@@ -33,7 +33,7 @@ public final class ToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
         let responseData = try await sendRequest(request)
         let model = try Current.decoder.decode(DTOModel.ToDos.self, from: responseData)
         Logger.network.info(
-            "\(Current.logHeader()) Get \(model.todos.count) records, last model id \(model.todos.last?.id ?? -1)"
+            "\(String.logHeader()) Get \(model.todos.count) records, last model id \(model.todos.last?.id ?? -1)"
         )
         return model
     }
@@ -42,7 +42,7 @@ public final class ToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
         let request = try buildRequest(for: .fetchToDo(id: id))
         let responseData = try await sendRequest(request)
         let model = try Current.decoder.decode(DTOModel.ToDo.self, from: responseData)
-        Logger.network.info("\(Current.logHeader()) Get todo with id \(id): [\(model)]")
+        Logger.network.info("\(String.logHeader()) Get todo with id \(id): [\(model)]")
         return model
     }
 
@@ -51,7 +51,7 @@ public final class ToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
         let request = try buildRequest(with: rawBody, for: .createToDo)
         let responseData = try await sendRequest(request)
         let model = try Current.decoder.decode(DTOModel.ToDo.self, from: responseData)
-        Logger.network.info("\(Current.logHeader()) Created: [\(model)]")
+        Logger.network.info("\(String.logHeader()) Created: [\(model)]")
         return model
     }
 
@@ -61,14 +61,14 @@ public final class ToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
         let request = try buildRequest(with: rawBody, for: .updateToDo(id: dto.id))
         let responseData = try await sendRequest(request)
         let model = try Current.decoder.decode(DTOModel.ToDo.self, from: responseData)
-        Logger.network.info("\(Current.logHeader()) Updated: [\(model)]")
+        Logger.network.info("\(String.logHeader()) Updated: [\(model)]")
         return model
     }
 
     public func deleteToDo(id: Int) async throws {
         let request = try buildRequest(for: .deleteToDo(id: id))
         let _ = try await sendRequest(request)
-        Logger.network.info("\(Current.logHeader()) Deleted toDo with id: [\(id)]")
+        Logger.network.info("\(String.logHeader()) Deleted toDo with id: [\(id)]")
     }
 
     func buildRequest(with body: Data? = nil, for endpoint: HTTPEndpoint) throws -> URLRequest {

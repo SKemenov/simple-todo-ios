@@ -1,6 +1,6 @@
 //
 //  PersistenceController.swift
-//  ToDoList
+//  LocalStores
 //
 //  Created by Sergey Kemenov on 17.02.2026.
 //
@@ -10,14 +10,18 @@ import CoreData
 import Utilities
 import Logging
 
-
 public struct PersistenceController {
     public static let shared = PersistenceController()
     public let container: NSPersistentContainer
 
-    // For test & previews
     @MainActor
-    public static let preview: PersistenceController = {
+    public var mainViewContext: NSManagedObjectContext {
+        container.viewContext
+    }
+
+    #if DEBUG
+    // For test & previews
+    public static let inMemory: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         let todos = MockFileLoader.load("todos")
@@ -29,20 +33,18 @@ public struct PersistenceController {
         do {
             try viewContext.save()
         } catch {
-            let nsError = error as NSError
-            let message = "\(Current.logHeader()) Unresolved error \(nsError), \(nsError.userInfo)"
-            Logger.storage.critical("\(message)")
+            Logger.storage.critical("\(String.logHeader()) Unresolved error \(error)")
         }
         return result
     }()
-
+    #endif
 
     private init(inMemory: Bool = false) {
         let modelName = "CDModel"
 
         guard let modelURL = Bundle.module.url(forResource: modelName, withExtension: "momd"),
               let model = NSManagedObjectModel(contentsOf: modelURL) else {
-            let message = "\(Current.logHeader()) Failed to load CoreData [\(modelName)] model"
+            let message = "\(String.logHeader()) Failed to load CoreData [\(modelName)] model"
             Logger.storage.critical("\(message)")
             fatalError(message)
         }
@@ -55,21 +57,29 @@ public struct PersistenceController {
 
         container.loadPersistentStores { description, error in
             if let error {
-                let message = "\(Current.logHeader()) CoreData store load failed: \(error)"
+                let message = "\(String.logHeader()) CoreData store load failed: \(error)"
                 Logger.storage.critical("\(message)")
                 fatalError(message)
             }
-            Logger.storage.info("\(Current.logHeader()) Core Data loaded: \(description)")
+            Logger.storage.info("\(String.logHeader()) Core Data loaded: \(description)")
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 
-    nonisolated
-    public func newBackgroundContext() -> NSManagedObjectContext {
+    public func newBackgroundContext() async -> NSManagedObjectContext {
         let context = container.newBackgroundContext()
         context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         context.automaticallyMergesChangesFromParent = true
         return context
+    }
+
+    public func performBackground<T>(
+        _ action: @Sendable @escaping (NSManagedObjectContext) throws -> T
+    ) async rethrows -> T {
+        let context = await newBackgroundContext()
+        return try await context.perform {
+            try action(context)
+        }
     }
 }

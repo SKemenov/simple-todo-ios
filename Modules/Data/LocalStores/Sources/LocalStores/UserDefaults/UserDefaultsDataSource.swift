@@ -15,11 +15,11 @@ public final class UserDefaultsDataSource: UserDefaultsDataSourceProtocol {
     private let coreDataKey = "is_core_data_synced"
 
     public init() {
-        Logger.storage.info("\(Current.logHeader()) Started")
+        Logger.storage.info("\(String.logHeader()) Started")
     }
 
     deinit {
-        Logger.storage.info("\(Current.logHeader()) Deinited")
+        Logger.storage.info("\(String.logHeader()) Deinited")
     }
 
     public var isCoreDataSynced: Bool {

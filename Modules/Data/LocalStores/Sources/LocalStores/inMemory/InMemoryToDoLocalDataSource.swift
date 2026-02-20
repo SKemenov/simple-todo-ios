@@ -5,6 +5,7 @@
 //  Created by Sergey Kemenov on 16.02.2026.
 //
 
+#if DEBUG
 import Foundation
 import DomainInterface
 import DataInterface
@@ -15,29 +16,32 @@ public final class InMemoryToDoLocalDataSource: ToDoLocalDataSourceProtocol {
     private var toDos: [DomainModel.ToDo] = []
 
     public init() {
-        Logger.storage.info("\(Current.logHeader()) Started")
+        Logger.storage.info("\(String.logHeader()) Started")
     }
 
     deinit {
-        Logger.storage.info("\(Current.logHeader()) Deinited")
+        Logger.storage.info("\(String.logHeader()) Deinited")
     }
 
     public func fetchAllToDos() async throws -> [DomainModel.ToDo] {
         toDos = MockFileLoader.load("todos")
-        Logger.storage.info("\(Current.logHeader()) fetched [\(self.toDos.count)] records")
+        Logger.storage.info("\(String.logHeader()) fetched [\(self.toDos.count)] records")
         return toDos
     }
 
-    public func saveToDo(_ dto: DomainModel.ToDo) async throws {
-        if let index = toDos.firstIndex(where: { $0.id == dto.id }) {
-            toDos[index] = dto
+    public func saveToDo(_ model: DomainModel.ToDo) async throws {
+        if let index = toDos.firstIndex(where: { $0.id == model.id }) {
+            toDos[index] = model
         } else {
-            toDos.insert(dto, at: 0)
+            toDos.insert(model, at: 0)
         }
-        try await syncAllTodos(toDos)
     }
 
-    public func deleteToDo(id: Int) async throws {
+    public func getToDo(id: UUID) async throws -> DomainInterface.DomainModel.ToDo? {
+        toDos.filter { $0.id == id }.first
+    }
+
+    public func deleteToDo(id: UUID) async throws {
         toDos.removeAll { $0.id == id }
         try await syncAllTodos(toDos)
     }
@@ -46,8 +50,10 @@ public final class InMemoryToDoLocalDataSource: ToDoLocalDataSourceProtocol {
         toDos = []
     }
 
-    public func syncAllTodos(_ dtos: [DomainModel.ToDo]) async throws {
-        toDos = dtos
-        Logger.storage.info("\(Current.logHeader()) synced [\(self.toDos.count)] records")
+    public func syncAllTodos(_ models: [DomainModel.ToDo]) async throws {
+        toDos = models
+        Logger.storage.info("\(String.logHeader()) synced [\(self.toDos.count)] records")
     }
 }
+#endif
+

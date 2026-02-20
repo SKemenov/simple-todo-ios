@@ -5,6 +5,7 @@
 //  Created by Sergey Kemenov on 17.02.2026.
 //
 
+#if DEBUG
 import Foundation
 import DataInterface
 import Utilities
@@ -20,7 +21,7 @@ public final class MockToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
 
     public init() {
         setupMockData()
-        Logger.network.info("\(Current.logHeader()) Started. Has \(self.todos.count) records.")
+        Logger.network.info("\(String.logHeader()) Started. Has \(self.todos.count) records.")
     }
 
     private func setupMockData() {
@@ -53,7 +54,7 @@ public final class MockToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
         var newToDo = dto
         newToDo.id = nextToDoId
         todos.insert(newToDo, at: 0)
-        Logger.network.info("\(Current.logHeader()) Created: [\(newToDo)]")
+        Logger.network.info("\(String.logHeader()) Created: [\(newToDo)]")
         return newToDo
     }
 
@@ -66,12 +67,13 @@ public final class MockToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
         var newToDo = dto
         newToDo.id = oldToDo.id
         todos[position] = newToDo
-        Logger.network.info("\(Current.logHeader()) Updated: [\(newToDo)]")
+        Logger.network.info("\(String.logHeader()) Updated: [\(newToDo)]")
         return newToDo
     }
 
     public func deleteToDo(id: Int) async throws {
         todos.removeAll { $0.id == id }
-        Logger.network.info("\(Current.logHeader()) Deleted toDo with id: [\(id)]")
+        Logger.network.info("\(String.logHeader()) Deleted toDo with id: [\(id)]")
     }
 }
+#endif
