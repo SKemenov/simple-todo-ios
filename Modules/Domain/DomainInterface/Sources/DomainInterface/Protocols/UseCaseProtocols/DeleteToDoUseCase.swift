@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol DeleteToDoUseCaseProtocol {
-    func execute(id: Int) async throws
+    func execute(id: UUID) async throws
 }

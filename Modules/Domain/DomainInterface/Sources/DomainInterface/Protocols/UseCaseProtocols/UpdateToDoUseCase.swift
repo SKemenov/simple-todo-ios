@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol UpdateToDoUseCaseProtocol {
-    func execute(id: Int, title: String, description: String) async throws
+    func execute(id: UUID, title: String, description: String) async throws
 }

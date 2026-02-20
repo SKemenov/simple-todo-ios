@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol CompleteToDoUseCaseProtocol {
-    func execute(id: Int, isCompleted: Bool) async throws
+    func execute(id: UUID, isCompleted: Bool) async throws
 }

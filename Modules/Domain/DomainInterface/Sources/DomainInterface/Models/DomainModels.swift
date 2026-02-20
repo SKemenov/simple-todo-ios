@@ -12,8 +12,9 @@ public enum DomainModel {
 }
 
 extension DomainModel {
-    public struct ToDo: Identifiable, Equatable, Hashable, Sendable, Decodable, CustomStringConvertible {
-        public var id: Int
+    public struct ToDo: Identifiable, Equatable, Hashable, CustomStringConvertible {
+        public var id: UUID
+        public var dtoId: Int?
         public var todoTitle: String
         public var todoDescription: String
         public var createAt: Date
@@ -21,7 +22,8 @@ extension DomainModel {
         public var userId: Int
 
         public init(
-            id: Int,
+            id: UUID = UUID(),
+            dtoId: Int? = nil,
             todoTitle: String,
             todoDescription: String = "",
             createAt: Date = Current.date(),
@@ -29,6 +31,7 @@ extension DomainModel {
             userId: Int = 1
         ) {
             self.id = id
+            self.dtoId = dtoId
             self.todoTitle = todoTitle
             self.todoDescription = todoDescription
             self.createAt = createAt
@@ -37,7 +40,7 @@ extension DomainModel {
         }
 
         public var description: String {
-            "DomainModel.ToDo(id: \(id), title: \(todoTitle), description: \(todoDescription)"
+            "DomainModel.ToDo(id: \(id), DTO id: \(dtoId ?? -1), title: \(todoTitle), description: \(todoDescription)"
             + ", isCompleted: \(isCompleted))"
         }
     }
