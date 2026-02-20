@@ -15,7 +15,7 @@ public final class DeleteToDoUseCase: DeleteToDoUseCaseProtocol {
         self.repository = repository
     }
 
-    public func execute(id: Int) async throws {
+    public func execute(id: UUID) async throws {
         try await repository.deleteToDo(id: id)
     }
 }

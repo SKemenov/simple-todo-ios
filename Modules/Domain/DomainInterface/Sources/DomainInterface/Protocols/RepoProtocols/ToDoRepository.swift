@@ -8,11 +8,10 @@
 import Foundation
 
 public protocol ToDoRepositoryProtocol {
-    var nextToDoId: Int { get }
     func fetchAllToDos() async throws -> [DomainModel.ToDo]
-    func getToDo(id: Int) async throws -> DomainModel.ToDo?
+    func getToDo(id: UUID) async throws -> DomainModel.ToDo?
     func createToDo(_ model: DomainModel.ToDo) async throws
     func updateToDo(_ model: DomainModel.ToDo) async throws
-    func deleteToDo(id: Int) async throws
+    func deleteToDo(id: UUID) async throws
     func clearCache() async throws
 }

@@ -26,7 +26,6 @@ public final class CreateToDoUseCase: CreateToDoUseCaseProtocol {
         }
 
         let toDo = DomainModel.ToDo(
-            id: repository.nextToDoId,
             todoTitle: checkedTitle,
             todoDescription: checkedDescription
         )

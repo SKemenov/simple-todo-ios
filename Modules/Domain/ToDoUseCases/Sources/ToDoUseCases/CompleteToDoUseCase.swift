@@ -16,10 +16,11 @@ public final class CompleteToDoUseCase: CompleteToDoUseCaseProtocol {
         self.repository = repository
     }
 
-    public func execute(id: Int, isCompleted: Bool) async throws {
+    public func execute(id: UUID, isCompleted: Bool) async throws {
         guard let oldToDo = try await repository.getToDo(id: id) else { return }
         let toDo = DomainModel.ToDo(
                 id: id,
+                dtoId: oldToDo.dtoId,
                 todoTitle: oldToDo.todoTitle,
                 todoDescription: oldToDo.todoDescription,
                 createAt: oldToDo.createAt,

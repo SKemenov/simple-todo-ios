@@ -16,7 +16,7 @@ public final class UpdateToDoUseCase: UpdateToDoUseCaseProtocol {
         self.repository = repository
     }
 
-    public func execute(id: Int, title: String, description: String) async throws {
+    public func execute(id: UUID, title: String, description: String) async throws {
         var checkedTitle = validator.validateTitle(title)
         var checkedDescription = validator.validateDescription(description)
 
@@ -32,6 +32,7 @@ public final class UpdateToDoUseCase: UpdateToDoUseCaseProtocol {
         if let oldToDo {
             toDo = DomainModel.ToDo(
                 id: id,
+                dtoId: oldToDo.dtoId,
                 todoTitle: checkedTitle,
                 todoDescription: checkedDescription,
                 createAt: oldToDo.createAt,
