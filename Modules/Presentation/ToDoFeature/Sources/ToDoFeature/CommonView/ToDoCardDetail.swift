@@ -50,3 +50,16 @@ private extension View {
             .lineLimit(lines)
     }
 }
+
+#Preview {
+    ToDoCardDetail(
+        UIModel.ToDo(
+            id: UUID(),
+            title: "Task",
+            description: "some description",
+            createAt: Date().createDateStamp(),
+            isCompleted: false
+        )
+    )
+    .preferredColorScheme(.dark)
+}

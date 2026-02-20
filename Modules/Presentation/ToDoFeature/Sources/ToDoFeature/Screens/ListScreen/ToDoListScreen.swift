@@ -12,7 +12,7 @@ public struct ToDoListScreen: View {
     @EnvironmentObject private var coordinator: AppCoordinator
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var vm: ToDoListViewModel
-    @State private var cardSizes: [Int: CGSize] = [:]
+    @State private var cardSizes: [UUID: CGSize] = [:]
 
     public init(vm: ToDoListViewModel) {
         _vm = StateObject(wrappedValue: vm)
@@ -38,7 +38,7 @@ public struct ToDoListScreen: View {
                     noTodos
                 }
             }
-            .navigationTitle("ToDos")
+            .navigationTitle(LocalizedStringResource("ToDos", bundle: .module))
             .overlay(alignment: .bottom) { footer }
         }
         .background(.designSystem(.background(.primary)))
@@ -90,13 +90,13 @@ private extension ToDoListScreen {
     }
 
     var noTodos: some View {
-        DSEmptyStateView()
+        DSEmptyState()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.designSystem(.background(.primary)))
     }
 
     var noFilteredTodos: some View {
-        DSEmptyStateView(isSearch: true)
+        DSEmptyState(isSearch: true)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.designSystem(.background(.primary)))
     }
@@ -111,7 +111,7 @@ private extension ToDoListScreen {
     @ViewBuilder
     var errorView: some View {
         if let error = vm.errorMessage {
-            DSErrorView(message: error) {
+            DSError(message: error) {
                 Task { await vm.loadData() }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -136,7 +136,7 @@ private extension ToDoListScreen {
             .foregroundStyle(.designSystem(.text(.primary)))
     }
 
-    func backgroundGeometryReader(for id: Int) -> some View {
+    func backgroundGeometryReader(for id: UUID) -> some View {
         GeometryReader { proxy in
             Color.clear
                 .preference(
@@ -148,11 +148,11 @@ private extension ToDoListScreen {
 
     @ViewBuilder
     func contextMenu(for toDo: UIModel.ToDo) -> some View {
-        Button("Edit", systemImage: .DS.Icons.edit) {
+        Button(LocalizedStringResource("Edit", bundle: .module), systemImage: .DS.Icons.edit) {
             coordinator.push(page: .toDoDetail(model: toDo))
         }
-        ShareLink("Share", item: vm.exportToDo(toDo))
-        Button("Delete", systemImage: .DS.Icons.delete, role: .destructive) {
+        ShareLink(LocalizedStringResource("Share", bundle: .module), item: vm.exportToDo(toDo))
+        Button(LocalizedStringResource("Delete", bundle: .module), systemImage: .DS.Icons.delete, role: .destructive) {
             Task { try await vm.deleteToDo(id: toDo.id) }
         }
     }
@@ -170,9 +170,18 @@ private extension ToDoListScreen {
 
 // MARK: - Helpers
 struct SizePreferenceKey: PreferenceKey {
-    static var defaultValue: [Int: CGSize] = [:]
+    static var defaultValue: [UUID: CGSize] = [:]
 
-    static func reduce(value: inout [Int: CGSize], nextValue: () -> [Int: CGSize]) {
+    static func reduce(value: inout [UUID: CGSize], nextValue: () -> [UUID: CGSize]) {
         value.merge(nextValue()) { $1 }
     }
 }
+
+#if DEBUG
+#Preview {
+    ToDoListScreen(vm: UIMockDependencyContainer().makeToDoListViewModel())
+        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "RU"))
+}
+#endif

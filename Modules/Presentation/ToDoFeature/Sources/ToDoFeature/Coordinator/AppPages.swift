@@ -5,7 +5,7 @@
 //  Created by Sergey Kemenov on 10.02.2026.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - Enum with AppCoordinator' pages
 public enum AppPages: Hashable {

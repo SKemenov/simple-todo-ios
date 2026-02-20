@@ -20,7 +20,6 @@ public final class RootViewModel: ObservableObject {
         getAllToDosUseCase: GetAllToDosUseCaseProtocol,
         clearCacheToDoUseCase: ClearCacheToDoUseCaseProtocol
     ) {
-        Logger.userFlow.info("\(Current.logHeader()) Inited")
         self.getAllToDosUseCase = getAllToDosUseCase
         self.clearCacheToDoUseCase = clearCacheToDoUseCase
     }
@@ -28,14 +27,14 @@ public final class RootViewModel: ObservableObject {
     @MainActor
     func loadData() async {
         guard let todos = try? await getAllToDosUseCase.execute() else { return }
-        Logger.userFlow.info("\(Current.logHeader()) Loaded. Local DataStore has [\(todos.count)] records")
+        Logger.userFlow.info("\(String.logHeader()) Loaded. Local DataStore has [\(todos.count)] records")
         totalCount = todos.count
     }
 
     @MainActor
     func clearCache() async {
         try? await clearCacheToDoUseCase.execute()
-        Logger.userFlow.info("\(Current.logHeader()) Deleted all records")
+        Logger.userFlow.info("\(String.logHeader()) Deleted all records")
         totalCount = 0
     }
 }
