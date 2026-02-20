@@ -7,13 +7,11 @@
 
 import SwiftUI
 import DesignSystem
+//import DomainInterface
 
 public struct RootScreen: View {
     @EnvironmentObject private var coordinator: AppCoordinator
     @StateObject private var vm: RootViewModel
-
-    private let titlePrompt: LocalizedStringKey = "There's a root view."
-    private let descriptionPrompt: LocalizedStringKey = "rootView.detailDescription"
 
     public init(vm: RootViewModel) {
         _vm = StateObject(wrappedValue: vm)
@@ -25,14 +23,15 @@ public struct RootScreen: View {
                 .font(.designSystem(.iconLarge))
                 .foregroundColor(.designSystem(.text(.accent)))
 
-            showText(titlePrompt)
-            showText(descriptionPrompt)
+            showText("There's a root view.")
+            showText("rootView.detailDescription")
 
-            Button("Open ToDoList", action: openList)
+            Button(LocalizedStringResource("Open ToDoList", bundle: .module), action: openList)
                 .buttonStyle(.bordered)
                 .foregroundColor(.designSystem(.text(.accent)))
+                .padding()
 
-            Button("Clear CoreData (no confirmation)", action: clearCoreData)
+            Button(LocalizedStringResource("Clear CoreData (no confirmation)", bundle: .module), action: clearCoreData)
                 .buttonStyle(.bordered)
                 .foregroundColor(.designSystem(.text(.accent)))
 
@@ -49,8 +48,8 @@ public struct RootScreen: View {
 }
 
 private extension RootScreen {
-    func showText(_ string: LocalizedStringKey) -> some View {
-        Text(string, bundle: .module)
+    func showText(_ text: String.LocalizationValue) -> some View {
+        Text(LocalizedStringResource(text, bundle: .module))
             .font(.designSystem(.body))
             .foregroundColor(.designSystem(.text(.primary)))
             .multilineTextAlignment(.center)
@@ -64,3 +63,12 @@ private extension RootScreen {
         Task { await vm.clearCache() }
     }
 }
+
+#if DEBUG
+#Preview {
+    RootScreen(vm: UIMockDependencyContainer().makeRootViewModel())
+        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "RU"))
+}
+#endif

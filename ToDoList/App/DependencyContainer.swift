@@ -10,38 +10,36 @@ import ToDoFeature
 import Logging
 import Utilities
 
-final class DependencyContainer: ObservableObject {
+final class DependencyContainer {
     init() {
-        Logger.core.info("\(Current.logHeader()) Container started")
+        Logger.core.info("\(String.logHeader()) Container started")
     }
 
     deinit {
-        Logger.core.info("\(Current.logHeader()) Container deinited")
+        Logger.core.info("\(String.logHeader()) Container deinited")
     }
 
     // MARK: - Public properties
     public lazy var persistenceController: PersistenceController = {
-        Logger.core.info("\(Current.logHeader()) Requesting persistenceController")
+        Logger.core.info("\(String.logHeader()) Requesting persistenceController")
         return PersistenceController.shared
     }()
 
     public lazy var userDefaultsDataSource: UserDefaultsDataSourceProtocol = {
-        Logger.core.info("\(Current.logHeader()) Requesting userDefaultsDataSource")
+        Logger.core.info("\(String.logHeader()) Requesting userDefaultsDataSource")
         return UserDefaultsDataSource()
     }()
 
     // MARK: - Private properties
-    private lazy var toDoRemoteDataSource: ToDoRemoteDataSourceProtocol = {
-//        return MockToDoRemoteDataSource()
-         return ToDoRemoteDataSource()
+    public lazy var toDoRemoteDataSource: ToDoRemoteDataSourceProtocol = {
+        ToDoRemoteDataSource()
     }()
 
-    private lazy var toDoLocalDataSource: ToDoLocalDataSourceProtocol = {
-//        return InMemoryToDoLocalDataSource()
-        return CoreDataToDoLocalDataSource(persistence: persistenceController)
+    public lazy var toDoLocalDataSource: ToDoLocalDataSourceProtocol = {
+        CoreDataToDoLocalDataSource(persistence: persistenceController)
     }()
 
-    private lazy var toDoRepository: ToDoRepositoryProtocol = {
+    public lazy var toDoRepository: ToDoRepositoryProtocol = {
         ToDoRepository(
             remoteDataSource: toDoRemoteDataSource,
             localDataSource: toDoLocalDataSource,

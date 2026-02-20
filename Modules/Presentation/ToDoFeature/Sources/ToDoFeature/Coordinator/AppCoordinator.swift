@@ -11,16 +11,17 @@ import DomainInterface
 import Logging
 import Utilities
 
+@MainActor
 public final class AppCoordinator: ObservableObject {
-    public private(set) var dependencyContainer: GetFeatureViewModelsProtocol
+    public let container: GetFeatureViewModelsProtocol
 
-    @Published var path: NavigationPath = NavigationPath()
+    @Published public var path: NavigationPath = NavigationPath()
     // No need to implement .sheet and .fullScreenCover for this app
-    @Published var isNeedToShowList: Bool = false
+    @Published public var isNeedToShowList: Bool = false
 
-    public init(dependencyContainer: GetFeatureViewModelsProtocol) {
-        self.dependencyContainer = dependencyContainer
-        Logger.core.info("\(Current.logHeader()) Started")
+    public init(container: GetFeatureViewModelsProtocol) {
+        self.container = container
+        Logger.core.info("\(String.logHeader()) Started")
     }
 }
 
@@ -29,7 +30,6 @@ public extension AppCoordinator {
     func push(page: AppPages) {
         path.append(page)
     }
-
 
     func pop() {
         guard !path.isEmpty else { return }
@@ -44,16 +44,16 @@ public extension AppCoordinator {
     func build(page: AppPages) -> some View {
         switch page {
         case .root:
-            RootScreen(vm: dependencyContainer.makeRootViewModel())
+            RootScreen(vm: container.makeRootViewModel())
 
         case .toDosList:
-            ToDoListScreen(vm: dependencyContainer.makeToDoListViewModel())
+            ToDoListScreen(vm: container.makeToDoListViewModel())
 
         case .createToDo:
-            ToDoDetailScreen(vm: dependencyContainer.makeToDoDetailViewModel())
+            ToDoDetailScreen(vm: container.makeToDoDetailViewModel())
 
         case let .toDoDetail(model: model):
-            ToDoDetailScreen(vm: dependencyContainer.makeToDoDetailViewModel(), model: model)
+            ToDoDetailScreen(vm: container.makeToDoDetailViewModel(), model: model)
         }
     }
 }

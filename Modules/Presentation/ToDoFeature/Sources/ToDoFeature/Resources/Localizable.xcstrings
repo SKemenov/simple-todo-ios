@@ -127,19 +127,19 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "CoreData has %lld records."
+                  "value" : "CoreData has %lld records"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "CoreData has %lld records."
+                  "value" : "CoreData has %lld records"
                 }
               },
               "zero" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "CoreData has %lld records."
+                  "value" : "CoreData has %lld records"
                 }
               }
             }
@@ -151,31 +151,31 @@
               "few" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "В CoreData %lld записи."
+                  "value" : "В CoreData %lld записи"
                 }
               },
               "many" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "В CoreData %lld записей."
+                  "value" : "В CoreData %lld записей"
                 }
               },
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "В CoreData %lld запись."
+                  "value" : "В CoreData %lld запись"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "В CoreData %lld записей."
+                  "value" : "В CoreData %lld записей"
                 }
               },
               "zero" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "В CoreData нет записей."
+                  "value" : "В CoreData нет записей"
                 }
               }
             }
@@ -283,14 +283,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Here you can open ToDoList or clear CoreData local store if needed."
+            "state" : "needs_review",
+            "value" : "Here you can open ToDoList or clear CoreData local store if needed"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Вы можете открыть ToDoList или очистить CoreData при необходимости."
+            "value" : "Вы можете открыть ToDoList или очистить CoreData при необходимости"
           }
         }
       }
@@ -331,14 +331,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "There's a root view."
+            "state" : "needs_review",
+            "value" : "There's a root view"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Это базовый экран."
+            "value" : "Это базовый экран"
           }
         }
       }

@@ -13,13 +13,13 @@ public enum UIModel { }
 
 extension UIModel {
     public struct ToDo: Identifiable, Equatable, Hashable {
-        public var id: Int
+        public var id: UUID
         public var title: String
         public var description: String
         public var createAt: String
         public var isCompleted: Bool
 
-        public init(id: Int, title: String, description: String, createAt: String, isCompleted: Bool) {
+        public init(id: UUID, title: String, description: String, createAt: String, isCompleted: Bool) {
             self.id = id
             self.title = title
             self.description = description
@@ -29,6 +29,10 @@ extension UIModel {
 
         public var searchable: String {
             "\(title) \(description) \(createAt)"
+        }
+
+        public var formattedCreateAt: String {
+            Current.date().createDateStamp()
         }
     }
 }
@@ -42,14 +46,13 @@ public extension UIModel.ToDo {
         self.isCompleted = domainModel.isCompleted
     }
 
-    public func toDomain() throws -> DomainModel.ToDo {
+    func toDomain() throws -> DomainModel.ToDo {
         DomainModel.ToDo(
             id: self.id,
             todoTitle: self.title,
             todoDescription: self.description,
-            createAt: Current.makeDateFromStamp(string: self.createAt),
-            isCompleted: self.isCompleted,
-            userId: 1 // hardcode, has no user
+            createAt: self.createAt.makeDateFromStamp(),
+            isCompleted: self.isCompleted
         )
     }
 }

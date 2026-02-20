@@ -18,6 +18,7 @@ let package = Package(
         .package(path: "../../Core/Utilities"),
         .package(path: "../../Core/DesignSystem"),
         .package(path: "../../Domain/DomainInterface"),
+        .package(path: "../../Domain/ToDoUseCases"),
     ],
     targets: [
         .target(
@@ -27,8 +28,8 @@ let package = Package(
                 "Utilities",
                 "DesignSystem",
                 "DomainInterface",
+                "ToDoUseCases",
             ],
-            path: "Sources/TodoFeature",
             resources: [
                 .process("Resources/"),
             ],

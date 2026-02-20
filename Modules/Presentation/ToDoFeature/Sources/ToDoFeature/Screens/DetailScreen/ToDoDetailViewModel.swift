@@ -40,7 +40,6 @@ public final class ToDoDetailViewModel: ObservableObject {
         self.createUseCase = createUseCase
         self.updateUseCase = updateUseCase
         self.toDo = toDo
-        Logger.userFlow.info("\(Current.logHeader()) inited")
     }
 
     @MainActor
@@ -49,13 +48,13 @@ public final class ToDoDetailViewModel: ObservableObject {
         title = toDo.title
         description = toDo.description
         createdAt = toDo.createAt
-        Logger.userFlow.info("\(Current.logHeader()) Loaded todo with id \(toDo.id):\(toDo.searchable)")
+        Logger.userFlow.info("\(String.logHeader()) Loaded todo with id \(toDo.id):\(toDo.searchable)")
     }
 
     @MainActor
     func saveData() async {
         guard !isSaving else { return }
-        Logger.userFlow.info("\(Current.logHeader()) saving...")
+        Logger.userFlow.info("\(String.logHeader()) saving...")
         isSaving = true
         isLoading = true
         errorMessage = nil
@@ -65,18 +64,18 @@ public final class ToDoDetailViewModel: ObservableObject {
         }
 
         if let toDo {
-            Logger.userFlow.info("\(Current.logHeader()) It's an update...")
+            Logger.userFlow.info("\(String.logHeader()) It's an update...")
             do {
                 try await updateToDo(id: toDo.id)
             } catch {
-                Logger.userFlow.error("\(Current.logHeader()) Updating error: \(error)")
+                Logger.userFlow.error("\(String.logHeader()) Updating error: \(error)")
             }
         } else {
             do {
                 try await createToDo()
             } catch {
                 errorMessage = "Failed to create todo."
-                Logger.userFlow.error("\(Current.logHeader()) Creating error: \(error)")
+                Logger.userFlow.error("\(String.logHeader()) Creating error: \(error)")
             }
         }
     }
@@ -84,12 +83,12 @@ public final class ToDoDetailViewModel: ObservableObject {
     nonisolated
     func createToDo() async throws {
         try await createUseCase.execute(title: title, description: description)
-        Logger.userFlow.info("\(Current.logHeader()) Created toDo with title [\(self.title)]")
+        Logger.userFlow.info("\(String.logHeader()) Created toDo with title [\(self.title)]")
     }
 
     nonisolated
-    func updateToDo(id: Int) async throws {
+    func updateToDo(id: UUID) async throws {
         try await updateUseCase.execute(id: id, title: title, description: description)
-        Logger.userFlow.info("\(Current.logHeader()) Updated toDo with id [\(id)]")
+        Logger.userFlow.info("\(String.logHeader()) Updated toDo with id [\(id)]")
     }
 }

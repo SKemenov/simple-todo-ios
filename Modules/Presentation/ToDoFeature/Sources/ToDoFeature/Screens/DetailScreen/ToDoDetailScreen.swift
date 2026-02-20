@@ -12,9 +12,6 @@ public struct ToDoDetailScreen: View {
     @EnvironmentObject private var coordinator: AppCoordinator
     @ObservedObject private var vm: ToDoDetailViewModel
 
-    private let titlePrompt: LocalizedStringKey = "ToDo title"
-    private let descriptionPrompt: LocalizedStringKey = "ToDo detail"
-
     public init(vm: ToDoDetailViewModel, model: UIModel.ToDo? = nil) {
         _vm = .init(wrappedValue: vm)
         vm.toDo = model
@@ -49,19 +46,14 @@ public struct ToDoDetailScreen: View {
 
 private extension ToDoDetailScreen {
     var todoTitle: some View {
-        TextField(
-            "",
-            text: $vm.title,
-            prompt: Text(titlePrompt, bundle: .module).foregroundColor(.designSystem(.text(.primary))),
-            axis: .vertical
-        )
-        .font(.designSystem(.titleLarge))
-        .foregroundStyle(.designSystem(.text(.primary)))
-        .autocorrectionDisabled(false)
-        .autocapitalization(.sentences)
-        .keyboardType(.default)
-        .onSubmit(hideKeyboard)
-        .lineLimit(1...5)
+        TextField("", text: $vm.title, prompt: textPrompt("ToDo title"), axis: .vertical)
+            .font(.designSystem(.titleLarge))
+            .foregroundStyle(.designSystem(.text(.primary)))
+            .autocorrectionDisabled(false)
+            .autocapitalization(.sentences)
+            .keyboardType(.default)
+            .onSubmit(hideKeyboard)
+            .lineLimit(1...5)
     }
 
     var todoDate: some View {
@@ -72,19 +64,14 @@ private extension ToDoDetailScreen {
     }
 
     var todoDescription: some View {
-        TextField(
-            "",
-            text: $vm.description,
-            prompt: Text(descriptionPrompt, bundle: .module).foregroundColor(.designSystem(.text(.primary))),
-            axis: .vertical
-        )
-        .font(.designSystem(.body))
-        .foregroundStyle(.designSystem(.text(.primary)))
-        .autocorrectionDisabled(false)
-        .autocapitalization(.sentences)
-        .keyboardType(.default)
-        .onSubmit(hideKeyboard)
-        .lineLimit(2...10)
+        TextField("", text: $vm.description, prompt: textPrompt("ToDo detail"), axis: .vertical)
+            .font(.designSystem(.body))
+            .foregroundStyle(.designSystem(.text(.primary)))
+            .autocorrectionDisabled(false)
+            .autocapitalization(.sentences)
+            .keyboardType(.default)
+            .onSubmit(hideKeyboard)
+            .lineLimit(10)
     }
 
     @ViewBuilder
@@ -92,6 +79,11 @@ private extension ToDoDetailScreen {
         if vm.isLoading {
             ProgressView()
         }
+    }
+
+    func textPrompt(_ text: String.LocalizationValue) -> Text {
+        Text(LocalizedStringResource(text, bundle: .module))
+            .foregroundColor(.designSystem(.text(.primary)))
     }
 
     func saveAndExit() {
@@ -103,3 +95,15 @@ private extension ToDoDetailScreen {
         }
     }
 }
+
+#if DEBUG
+#Preview {
+    ToDoDetailScreen(
+        vm: UIMockDependencyContainer().makeToDoDetailViewModel(),
+        model: nil
+    )
+    .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+    .preferredColorScheme(.dark)
+    .environment(\.locale, Locale(identifier: "RU"))
+}
+#endif

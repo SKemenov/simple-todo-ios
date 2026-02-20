@@ -61,3 +61,17 @@ private extension ToDoCard {
         }
     }
 }
+
+#if DEBUG
+#Preview {
+    ToDoCard(UIModel.ToDo(
+        id: UUID(),
+        title: "Task",
+        description: "some description",
+        createAt: Date().createDateStamp(),
+        isCompleted: false
+    ), isLast: false, action: {})
+    .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+    .preferredColorScheme(.dark)
+}
+#endif
