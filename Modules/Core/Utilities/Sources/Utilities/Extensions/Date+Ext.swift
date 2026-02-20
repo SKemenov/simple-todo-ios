@@ -10,13 +10,13 @@ import Foundation
 public extension Date {
     /// Converts the current date to the local time zone using `Current.timeZoneInterval`.
     /// - Returns: A `Date` adjusted for the local time zone.
-    func toLocalDate() -> Self {
+    func inLocalTime() -> Self {
         self.addingTimeInterval(Current.timeZoneInterval)
     }
 
     /// Converts the current date to the UTC time zone using `Current.timeZoneInterval`.
     /// - Returns: A `Date` adjusted for the UTC time zone.
-    func fromLocalDate() -> Self {
+    func inUTC() -> Self {
         self.addingTimeInterval(-Current.timeZoneInterval)
     }
 
@@ -27,7 +27,7 @@ public extension Date {
 
     /// Returns the first moment of a given Date, as a Date for the local time zone.
     func startOfLocalDay() -> Self {
-        self.startOfUTCDay().toLocalDate()
+        self.startOfUTCDay().inLocalTime()
     }
 
     func createDateStamp() -> String {
