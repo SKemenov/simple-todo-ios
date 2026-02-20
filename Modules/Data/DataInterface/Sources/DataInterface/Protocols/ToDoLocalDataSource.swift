@@ -1,5 +1,5 @@
 //
-//  Protocols.swift
+//  ToDoLocalDataSource.swift
 //  DataInterface
 //
 //  Created by Sergey Kemenov on 09.02.2026.
@@ -11,9 +11,10 @@ import DomainInterface
 public protocol ToDoLocalDataSourceProtocol {
     // For user cases
     func fetchAllToDos() async throws -> [DomainModel.ToDo]
-    func saveToDo(_ dto: DomainModel.ToDo) async throws
-    func deleteToDo(id: Int) async throws
+    func getToDo(id: UUID) async throws -> DomainModel.ToDo?
+    func saveToDo(_ model: DomainModel.ToDo) async throws
+    func deleteToDo(id: UUID) async throws
     // to setup CoreData
-    func syncAllTodos(_ dtos: [DomainModel.ToDo]) async throws
+    func syncAllTodos(_ models: [DomainModel.ToDo]) async throws
     func clearCache() async throws
 }

@@ -10,13 +10,14 @@ import Foundation
 import DomainInterface
 import Utilities
 
-public struct ToDoDomainMapper {
+public struct ToDoDomainMapper: Sendable {
     public static func toDomain(_ model: DTOModel.ToDo) throws -> DomainModel.ToDo {
         DomainModel.ToDo(
-            id: model.id,
-            todoTitle: model.todo,
+            id: UUID(),
+            dtoId: model.id,
+            todoTitle: model.todo.trimSpaces,
             todoDescription: "",
-            createAt: ToDoDomainMapper.fakeDate(),
+            createAt: ToDoDomainMapper.fakeDate(), // Let's make various dates
             isCompleted: model.completed,
             userId: model.userId
         )
@@ -24,7 +25,7 @@ public struct ToDoDomainMapper {
 
     public static func toDTO(_ model: DomainModel.ToDo ) -> DTOModel.ToDo {
         DTOModel.ToDo(
-            id: model.id,
+            id: model.dtoId ?? 1,
             todo: model.todoTitle,
             completed: model.isCompleted,
             userId: model.userId

@@ -11,7 +11,7 @@ public enum DTOModel {
 }
 
 extension DTOModel {
-    public struct ToDo: Codable, CustomStringConvertible {
+    public struct ToDo: Codable, Sendable, CustomStringConvertible {
         public var id: Int
         public var todo: String
         public var completed: Bool
@@ -29,7 +29,7 @@ extension DTOModel {
         }
     }
 
-    public struct ToDos: Codable {
+    public struct ToDos: Codable, Sendable {
         public var todos: [ToDo]
         public var total: Int
         public var skip: Int
@@ -43,7 +43,7 @@ extension DTOModel {
         }
     }
 
-    public struct UpdateToDo: Codable {
+    public struct UpdateToDo: Codable, Sendable {
         public var todo: String?
         public var completed: Bool?
 
