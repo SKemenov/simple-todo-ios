@@ -35,9 +35,9 @@ struct HTTPResponseValidator {
 
     func validateURLError(error: URLError) throws -> Never {
         switch error.code {
-        case .notConnectedToInternet:
+        case .notConnectedToInternet, .cannotConnectToHost, .networkConnectionLost:
             throw HTTPClientError.internetConnectivity
-        case .timedOut:
+        case .timedOut, .cannotFindHost:
             throw HTTPClientError.timeout
         default:
             throw HTTPClientError.unknown

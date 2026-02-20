@@ -1,4 +1,4 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -28,7 +28,6 @@ let package = Package(
                 "DataInterface",
             ],
             path: "Sources/Networking",
-            swiftSettings: [.swiftLanguageMode(.v5)],
         ),
         .testTarget(
             name: "NetworkingTests",
