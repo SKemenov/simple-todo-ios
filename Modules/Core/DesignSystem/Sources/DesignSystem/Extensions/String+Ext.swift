@@ -1,5 +1,5 @@
 //
-//  DS.swift
+//  String+Ext.swift
 //  DesignSystem
 //
 //  Created by Sergey Kemenov on 09.02.2026.
@@ -15,7 +15,7 @@ extension String {
     }
 }
 
-extension String.DS.Icons {
+extension String.DS.Icons: CaseIterable {
     /// `complete` for "checkmark.circle"
     public static let complete: String = "checkmark.circle"
 

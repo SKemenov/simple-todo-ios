@@ -68,7 +68,7 @@ extension DesignSystem {
 
 // MARK: - Font tokens
 extension DesignSystem {
-    public enum Fonts {
+    public enum Fonts: CaseIterable {
         case titleLarge, title, callout, headline, body, caption, icon, iconLarge
 
         var font: Font {

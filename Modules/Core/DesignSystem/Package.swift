@@ -1,4 +1,4 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -10,7 +10,7 @@ let package = Package(
     products: [
         .library(
             name: "DesignSystem",
-            targets: ["DesignSystem"]
+            targets: ["DesignSystem"],
         ),
     ],
     dependencies: [
@@ -26,7 +26,6 @@ let package = Package(
             resources: [
                 .process("Resources/"),
             ],
-            swiftSettings: [.swiftLanguageMode(.v5)],
         ),
         .testTarget(
             name: "DesignSystemTests",
