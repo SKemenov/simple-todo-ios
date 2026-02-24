@@ -68,8 +68,27 @@ private extension DSEmptyState {
             .multilineTextAlignment(.center)
     }
 }
-#Preview {
+
+#Preview("Empty State - English") {
     DSEmptyState()
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "EN"))
+}
+
+#Preview("Empty State - Russian") {
+    DSEmptyState()
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "RU"))
+}
+
+#Preview("Empty Search - English") {
+    DSEmptyState(isSearch: true)
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "EN"))
+}
+
+#Preview("Empty Search - Russian") {
+    DSEmptyState(isSearch: true)
         .preferredColorScheme(.dark)
         .environment(\.locale, Locale(identifier: "RU"))
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct DSSearchBar: View {
     @Binding var searchText: String
-
+    @FocusState private var isFocused: Bool
     public init(text: Binding<String>) {
         _searchText = text
     }
@@ -29,6 +29,9 @@ public struct DSSearchBar: View {
             }
         }
         .searchBarStyle()
+        .onTapGesture {
+            isFocused = true
+        }
     }
 }
 
@@ -40,6 +43,7 @@ private extension DSSearchBar {
             .autocorrectionDisabled(true)
             .autocapitalization(.none)
             .keyboardType(.default)
+            .focused($isFocused)
             .onSubmit(hideKeyboard)
     }
 
@@ -51,13 +55,15 @@ private extension DSSearchBar {
 
 private extension View {
     func searchBarStyle() -> some View {
-        font(.designSystem(.body))
+        self
+            .font(.designSystem(.body))
             .foregroundStyle(.designSystem(.text(.secondary)))
             .padding(.horizontal, .DS.Spacing.xSmall)
             .padding(.vertical, .DS.Spacing.small)
             .frame(height: .DS.Sizes.smallRow)
             .background(.designSystem(.background(.secondary)), in: RoundedRectangle(cornerRadius: .DS.Radiuses.medium))
             .padding(.horizontal, .DS.Spacing.xxLarge)
+            .contentShape(Rectangle())
     }
 }
 

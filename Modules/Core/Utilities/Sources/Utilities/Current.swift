@@ -31,4 +31,3 @@ public struct World: @unchecked Sendable {
         Logger.core.info("\(String.logHeader()) Started")
     }
 }
-

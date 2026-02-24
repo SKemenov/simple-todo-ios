@@ -2,7 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-
+      "shouldTranslate" : false
     },
     "button to create your first ToDo" : {
       "localizations" : {
@@ -15,7 +15,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "чтобы создать новую Задачу"
+            "value" : "чтобы создать Задачу"
           }
         }
       }
@@ -90,7 +90,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите на"
+            "value" : "Нажмите"
           }
         }
       }

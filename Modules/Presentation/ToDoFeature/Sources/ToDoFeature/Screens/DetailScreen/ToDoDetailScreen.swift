@@ -95,15 +95,18 @@ private extension ToDoDetailScreen {
         }
     }
 }
-
 #if DEBUG
-#Preview {
-    ToDoDetailScreen(
-        vm: UIMockDependencyContainer().makeToDoDetailViewModel(),
-        model: nil
-    )
-    .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
-    .preferredColorScheme(.dark)
-    .environment(\.locale, Locale(identifier: "RU"))
+#Preview("Detail (New) - Russian") {
+    ToDoDetailScreen(vm: UIMockDependencyContainer().makeToDoDetailViewModel(), model: nil)
+        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "RU"))
+}
+
+#Preview("Detail (New) - English") {
+    ToDoDetailScreen(vm: UIMockDependencyContainer().makeToDoDetailViewModel(), model: nil)
+        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "EN"))
 }
 #endif

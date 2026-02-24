@@ -57,9 +57,6 @@ private extension DSToggle {
 
 #Preview {
     VStack(alignment: .leading, spacing: .DS.Spacing.small) {
-
-        Text("Single option").font(.largeTitle)
-
         DSRow(leading: { Text("not selected, enabled") }, trailing: {
             DSToggle(isSelected: false)
         })
@@ -76,9 +73,9 @@ private extension DSToggle {
         DSRow(leading: { Text("selected, disabled") }, trailing: {
             DSToggle(isSelected: true).disabled(true)
         })
-        .padding(.bottom)
     }
     .padding()
-    .foregroundStyle(.designSystem(.text(.primary)))
+    .background(.designSystem(.background(.primary)))
     .preferredColorScheme(.dark)
+    .foregroundStyle(.designSystem(.text(.primary)))
 }
