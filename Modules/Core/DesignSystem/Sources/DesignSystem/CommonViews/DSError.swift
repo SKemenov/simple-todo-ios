@@ -39,8 +39,14 @@ public struct DSError: View {
     }
 }
 
-#Preview {
-    DSError(message: "Sample Error", retry: { print("button tapped") })
+#Preview("Error - Russian") {
+    DSError(message: "Пример ошибки", retry: { print("button tapped") })
         .preferredColorScheme(.dark)
         .environment(\.locale, Locale(identifier: "RU"))
+}
+
+#Preview("Error - English") {
+    DSError(message: "Sample Error", retry: { print("button tapped") })
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "EN"))
 }

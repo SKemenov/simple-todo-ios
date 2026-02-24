@@ -179,10 +179,17 @@ struct SizePreferenceKey: PreferenceKey {
 }
 
 #if DEBUG
-#Preview {
+#Preview("ToDo List - Russian") {
     ToDoListScreen(vm: UIMockDependencyContainer().makeToDoListViewModel())
         .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
         .preferredColorScheme(.dark)
         .environment(\.locale, Locale(identifier: "RU"))
+}
+
+#Preview("ToDo List - English") {
+    ToDoListScreen(vm: UIMockDependencyContainer().makeToDoListViewModel())
+        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "EN"))
 }
 #endif

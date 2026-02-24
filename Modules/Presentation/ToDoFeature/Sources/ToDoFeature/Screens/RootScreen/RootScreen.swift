@@ -63,12 +63,18 @@ private extension RootScreen {
         Task { await vm.clearCache() }
     }
 }
-
 #if DEBUG
-#Preview {
+#Preview("Root - Russian") {
     RootScreen(vm: UIMockDependencyContainer().makeRootViewModel())
         .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
         .preferredColorScheme(.dark)
         .environment(\.locale, Locale(identifier: "RU"))
+}
+
+#Preview("Root - English") {
+    RootScreen(vm: UIMockDependencyContainer().makeRootViewModel())
+        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+        .preferredColorScheme(.dark)
+        .environment(\.locale, Locale(identifier: "EN"))
 }
 #endif
