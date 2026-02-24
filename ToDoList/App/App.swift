@@ -31,7 +31,6 @@ struct ToDoListApp: App {
         WindowGroup {
             AppCoordinatorView()
                 .environmentObject(coordinator)
-//                .environment(\.managedObjectContext, persistence.mainViewContext)
                 .preferredColorScheme(.dark)
                 .onAppear {
                     UIView.appearance().tintColor = UIColor(Color.designSystem(.text(.accent)))
