@@ -38,6 +38,7 @@ public struct ToDoListScreen: View {
                     noTodos
                 }
             }
+            .simultaneousGesture(DragGesture().onChanged { _ in hideKeyboard() })
             .navigationTitle(LocalizedStringResource("ToDos", bundle: .module))
             .overlay(alignment: .bottom) { footer }
         }
