@@ -15,9 +15,9 @@ import LocalStores
 
 @main
 struct ToDoListApp: App {
-    private(set) var dependencyContainer: DependencyContainer
-    @StateObject private var coordinator: AppCoordinator
+    private let dependencyContainer: DependencyContainer
     private let persistence: PersistenceController
+    @StateObject private var coordinator: AppCoordinator
 
     init () {
         let container = DependencyContainer()
@@ -31,7 +31,6 @@ struct ToDoListApp: App {
         WindowGroup {
             AppCoordinatorView()
                 .environmentObject(coordinator)
-                .environment(\.managedObjectContext, persistence.mainViewContext)
                 .preferredColorScheme(.dark)
                 .onAppear {
                     UIView.appearance().tintColor = UIColor(Color.designSystem(.text(.accent)))
