@@ -10,7 +10,6 @@ import DesignSystem
 
 public struct ToDoListScreen: View {
     @EnvironmentObject private var coordinator: AppCoordinator
-    @Environment(\.scenePhase) private var scenePhase
     @StateObject private var vm: ToDoListViewModel
     @State private var cardSizes: [UUID: CGSize] = [:]
 
@@ -52,9 +51,6 @@ public struct ToDoListScreen: View {
         .refreshable {
             await vm.loadData()
         }
-        .task(id: scenePhase) {
-            if scenePhase == .active { await vm.loadData() }
-        }
     }
 }
 
@@ -80,14 +76,9 @@ private extension ToDoListScreen {
     }
 
     var footer: some View {
-        HStack {
-            Spacer()
-            totalCount
-            Spacer()
+        ListFooter(counter: vm.todosCount) {
+            coordinator.push(page: .createToDo)
         }
-        .padding(.vertical, .DS.Spacing.xxLarge)
-        .background(.designSystem(.background(.secondary)))
-        .overlay(alignment: .trailing) { createButton }
     }
 
     var noTodos: some View {
@@ -118,23 +109,6 @@ private extension ToDoListScreen {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.designSystem(.background(.primary)))
         }
-    }
-
-    var createButton: some View {
-        Button {
-            coordinator.push(page: .createToDo)
-        } label: {
-            Image.DS.Icons.create
-                .font(.designSystem(.title))
-                .foregroundStyle(.designSystem(.text(.accent)))
-        }
-        .padding()
-    }
-
-    var totalCount: some View {
-        Text("\(vm.todosCount) tasks", bundle: .module)
-            .font(.designSystem(.caption))
-            .foregroundStyle(.designSystem(.text(.primary)))
     }
 
     func backgroundGeometryReader(for id: UUID) -> some View {
