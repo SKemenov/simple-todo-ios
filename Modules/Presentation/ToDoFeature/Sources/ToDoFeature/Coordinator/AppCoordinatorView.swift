@@ -13,7 +13,6 @@ public struct AppCoordinatorView: View {
     public init() {}
     
     public var body: some View {
-
         NavigationStack(path: $coordinator.path) {
             coordinator.build(page: coordinator.isNeedToShowList ? .toDosList : .root)
                 .navigationDestination(for: AppPages.self) { page in
