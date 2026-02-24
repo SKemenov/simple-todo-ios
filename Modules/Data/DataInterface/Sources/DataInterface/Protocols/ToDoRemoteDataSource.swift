@@ -8,7 +8,7 @@
 import Foundation
 import DomainInterface
 
-public protocol ToDoRemoteDataSourceProtocol: Sendable {
+public protocol ToDoRemoteDataSourceProtocol {
     func fetchAllToDos() async throws -> DTOModel.ToDos
     func fetchToDos(page: Int) async throws -> DTOModel.ToDos
     func fetchToDo(id: Int) async throws -> DTOModel.ToDo
