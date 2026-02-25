@@ -9,7 +9,6 @@
 import Foundation
 import DomainInterface
 import DataInterface
-import Utilities
 import Logging
 
 public final class InMemoryToDoLocalDataSource: ToDoLocalDataSourceProtocol {

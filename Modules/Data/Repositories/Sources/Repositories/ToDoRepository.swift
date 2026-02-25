@@ -9,7 +9,6 @@ import Foundation
 import DataInterface
 import DomainInterface
 import Logging
-import Utilities
 
 public final class ToDoRepository: ToDoRepositoryProtocol {
     private let remoteDataSource: ToDoRemoteDataSourceProtocol
@@ -28,13 +27,18 @@ public final class ToDoRepository: ToDoRepositoryProtocol {
     }
 
     public func fetchAllToDos() async throws -> [DomainModel.ToDo] {
-        var todos: [DomainModel.ToDo] = []
-        if userDefaults.isCoreDataSynced {
-            let cachedDTOs = try await localDataSource.fetchAllToDos()
-            Logger.repos.debug("\(String.logHeader()) CoreData has [\(cachedDTOs.count)] records")
+        var todos: [DomainModel.ToDo] = try await localDataSource.fetchAllToDos()
+        Logger.repos.debug("\(String.logHeader()) CoreData has [\(todos.count)] records")
+
+        switch (userDefaults.isAppAlreadyHasFirstLaunch, userDefaults.isCoreDataSynced) {
+        case (false, _):
+            Logger.repos.debug("\(String.logHeader()) First launch, should return no records")
+            userDefaults.isAppAlreadyHasFirstLaunch = true
+
+        case (true, true):
             Logger.repos.debug("\(String.logHeader()) CoreData Synced, use local data")
-            todos = cachedDTOs
-        } else {
+
+        case (true, false):
             Logger.repos.debug("\(String.logHeader()) CoreData not synced, need to fetch DTOs from network")
             let response = try await remoteDataSource.fetchAllToDos()
             let dtos = response.todos

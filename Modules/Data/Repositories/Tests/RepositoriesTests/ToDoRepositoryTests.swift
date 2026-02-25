@@ -9,7 +9,6 @@ import Testing
 @testable import Repositories
 import DomainInterface
 import DataInterface
-import Utilities
 import CoreData
 import LocalStores
 import Networking
@@ -19,7 +18,7 @@ struct ToDoRepositoryTests {
 
     private func makeRepository(
         remote: ToDoRemoteDataSourceProtocol = MockToDoRemoteDataSource(),
-        local: ToDoLocalDataSourceProtocol = InMemoryToDoLocalDataSource(),
+        local: ToDoLocalDataSourceProtocol = CoreDataToDoLocalDataSource(persistence: PersistenceController.inMemory),
         userDefaults: UserDefaultsDataSourceProtocol = MockUserDefaultsDataSource()
     ) -> ToDoRepository {
         ToDoRepository(
@@ -44,36 +43,44 @@ struct ToDoRepositoryTests {
     @Test("createToDo saves locally first, then updates dtoId after remote success")
     func createUpdatesDtoId() async throws {
         let mockLocal = CoreDataToDoLocalDataSource(persistence: PersistenceController.inMemory)
-        let repo = makeRepository(local: mockLocal)
+        let sut = makeRepository(local: mockLocal)
 
         try await mockLocal.clearCache()
         let newToDo = sampleToDo()
         #expect(newToDo.dtoId == nil)
 
-        try await repo.createToDo(newToDo)
+        try await sut.createToDo(newToDo)
         let saved = try await mockLocal.fetchAllToDos()
         #expect(saved.count == 1)
         #expect(!saved.filter { $0.id == newToDo.id}.isEmpty)
     }
 
+    @Test("fetchAllToDos syncs for the first launch should not set isCoreDataSynced flag")
+    func fetchSyncsFirstLaunch() async throws {
+        let mockLocal = CoreDataToDoLocalDataSource(persistence: PersistenceController.inMemory)
+        let mockDefaults = MockUserDefaultsDataSource(isCoreDataSynced: false, isAppAlreadyHasFirstLaunch: false)
+        let sut = makeRepository(local: mockLocal, userDefaults: mockDefaults)
+        try await mockLocal.clearCache()
+
+        #expect(mockDefaults.isCoreDataSynced == false)
+        #expect(mockDefaults.isAppAlreadyHasFirstLaunch == false)
+
+        let fetched = try await sut.fetchAllToDos()
+        #expect(mockDefaults.isAppAlreadyHasFirstLaunch == true)
+        #expect(mockDefaults.isCoreDataSynced == false)
+        #expect(fetched.count == 0)
+    }
+
     @Test("fetchAllToDos syncs from remote when not synced, sets flag")
     func fetchSyncsWhenNeeded() async throws {
-        let mockLocal = InMemoryToDoLocalDataSource()
-        let mockDefaults = MockUserDefaultsDataSource(isCoreDataSynced: false)
-        let repo = makeRepository(local: mockLocal, userDefaults: mockDefaults)
+        let mockLocal = CoreDataToDoLocalDataSource(persistence: PersistenceController.inMemory)
+        let mockDefaults = MockUserDefaultsDataSource(isCoreDataSynced: false, isAppAlreadyHasFirstLaunch: true)
+        let sut = makeRepository(local: mockLocal, userDefaults: mockDefaults)
 
         #expect(mockDefaults.isCoreDataSynced == false)
 
-        let fetched = try await repo.fetchAllToDos()
+        let fetched = try await sut.fetchAllToDos()
         #expect(mockDefaults.isCoreDataSynced == true)
         #expect(try await mockLocal.fetchAllToDos().count == fetched.count)
-    }
-}
-
-private final class MockUserDefaultsDataSource: UserDefaultsDataSourceProtocol {
-    nonisolated(unsafe) var isCoreDataSynced: Bool
-
-    init(isCoreDataSynced: Bool = false) {
-        self.isCoreDataSynced = isCoreDataSynced
     }
 }

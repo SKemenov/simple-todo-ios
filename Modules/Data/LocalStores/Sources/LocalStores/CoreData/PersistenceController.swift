@@ -7,17 +7,11 @@
 
 import Foundation
 import CoreData
-import Utilities
 import Logging
 
 public struct PersistenceController {
+    private let container: NSPersistentContainer
     public static let shared = PersistenceController()
-    public let container: NSPersistentContainer
-
-    @MainActor
-    public var mainViewContext: NSManagedObjectContext {
-        container.viewContext
-    }
 
     #if DEBUG
     // For test & previews

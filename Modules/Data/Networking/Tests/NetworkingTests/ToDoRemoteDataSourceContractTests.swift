@@ -20,7 +20,9 @@ struct ToDoRemoteDataSourceContractTests {
             MockToDoRemoteDataSource()
         ]
 
-        sources.forEach { _ in #expect(true) }
+        sources.forEach { sut in
+            #expect(true)
+        }
     }
 
 
@@ -32,10 +34,10 @@ struct ToDoRemoteDataSourceContractTests {
         ]
 
         for source in sources {
-            let result = try await source.fetchAllToDos()
+            let sut = try await source.fetchAllToDos()
 
-            #expect(!result.todos.isEmpty, "Should return at least one todo")
-            #expect(result.total > 0)
+            #expect(!sut.todos.isEmpty, "Should return at least one todo")
+            #expect(sut.total > 0)
         }
     }
 
