@@ -4,7 +4,8 @@
       "id" : "8BF593C1-BCC6-4F9E-8A5D-80D4FF204FFC",
       "name" : "Configuration 1",
       "options" : {
-
+        "repeatInNewRunnerProcess" : true,
+        "testRepetitionMode" : "fixedIterations"
       }
     }
   ],
@@ -71,6 +72,7 @@
       }
     },
     {
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:Modules\/Data\/Repositories",
         "identifier" : "RepositoriesTests",

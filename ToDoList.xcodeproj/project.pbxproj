@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E9AD506E2F4894DE0004ADF6 /* TestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = E9AD506D2F4894DE0004ADF6 /* TestPlan.xctestplan */; };
 		E9C1BA152F39CC1800099FEE /* DataInterface in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA142F39CC1800099FEE /* DataInterface */; };
 		E9C1BA172F39CC1C00099FEE /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA162F39CC1C00099FEE /* DesignSystem */; };
 		E9C1BA192F39CC2000099FEE /* DomainInterface in Frameworks */ = {isa = PBXBuildFile; productRef = E9C1BA182F39CC2000099FEE /* DomainInterface */; };
@@ -35,7 +34,6 @@
 
 /* Begin PBXFileReference section */
 		E94855952F34CDA900368F8B /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9AD506D2F4894DE0004ADF6 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestPlan.xctestplan; path = Tests/TestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -93,7 +91,6 @@
 		E948558C2F34CDA900368F8B = {
 			isa = PBXGroup;
 			children = (
-				E9AD506D2F4894DE0004ADF6 /* TestPlan.xctestplan */,
 				E983AE262F4747440030051E /* Tests */,
 				E9C1BA132F39CC1800099FEE /* Frameworks */,
 				E97CE3672F362E18006ECA6B /* Modules */,
@@ -195,7 +192,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9AD506E2F4894DE0004ADF6 /* TestPlan.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
