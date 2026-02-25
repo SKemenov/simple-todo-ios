@@ -23,20 +23,19 @@ public struct RootScreen: View {
                 .font(.designSystem(.iconLarge))
                 .foregroundColor(.designSystem(.text(.accent)))
 
-            showText("There's a root view.")
-            showText("rootView.detailDescription")
+            showText(.rootViewHeader)
+            showText(.rootViewDescription)
 
-            Button(LocalizedStringResource("Open ToDoList", bundle: .module), action: openList)
+            Button(.rootViewOpenListButton, action: openList)
                 .buttonStyle(.bordered)
                 .foregroundColor(.designSystem(.text(.accent)))
                 .padding()
 
-            Button(LocalizedStringResource("Clear CoreData (no confirmation)", bundle: .module), action: clearCoreData)
+            Button(.rootViewClearCoreDataButton, action: clearCoreData)
                 .buttonStyle(.bordered)
                 .foregroundColor(.designSystem(.text(.accent)))
 
-            showText("CoreData has \(vm.totalCount) records.")
-
+            showText(.coreDataCounter(vm.totalCount))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.designSystem(.background(.primary)))
@@ -48,8 +47,8 @@ public struct RootScreen: View {
 }
 
 private extension RootScreen {
-    func showText(_ text: String.LocalizationValue) -> some View {
-        Text(LocalizedStringResource(text, bundle: .module))
+    func showText(_ text: LocalizedStringResource) -> some View {
+        Text(text)
             .font(.designSystem(.body))
             .foregroundColor(.designSystem(.text(.primary)))
             .multilineTextAlignment(.center)

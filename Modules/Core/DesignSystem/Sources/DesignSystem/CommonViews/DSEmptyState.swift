@@ -8,11 +8,6 @@
 import SwiftUI
 
 public struct DSEmptyState: View {
-    private let emptyTitle: LocalizedStringKey = "No ToDos yet"
-    private let emptyTap: LocalizedStringKey = "Tap the"
-    private let emptyDescription: LocalizedStringKey = "button to create your first ToDo"
-    private let searchTitle: LocalizedStringKey = "Not Found"
-    private let searchDescription: LocalizedStringKey = "Try to search another one"
     private let isSearch: Bool
 
     public init(isSearch: Bool = false) {
@@ -45,16 +40,16 @@ private extension DSEmptyState {
     }
 
     var title: some View {
-        Text(isSearch ? searchTitle : emptyTitle, bundle: .module)
+        Text(isSearch ? .dsEmptySearchTitle : .dsEmptyStateTitle)
             .font(.designSystem(.headline))
             .foregroundColor(.designSystem(.text(.primary)))
     }
 
     var emptyDesc: some View {
         HStack(spacing: .DS.Spacing.xxSmall) {
-            Text(emptyTap, bundle: .module)
+            Text(.globalTap)
             Image.DS.Icons.create.foregroundColor(.designSystem(.text(.accent)))
-            Text(emptyDescription, bundle: .module)
+            Text(.dsEmptyStateDescription)
         }
         .font(.designSystem(.body))
         .foregroundColor(.designSystem(.text(.secondary)))
@@ -62,7 +57,7 @@ private extension DSEmptyState {
     }
 
     var searchDesc: some View {
-        Text(searchDescription, bundle: .module)
+        Text(.dsEmptySearchDescription)
             .font(.designSystem(.body))
             .foregroundColor(.designSystem(.text(.secondary)))
             .multilineTextAlignment(.center)

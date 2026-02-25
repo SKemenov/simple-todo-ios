@@ -28,7 +28,7 @@ public struct DSError: View {
                 .multilineTextAlignment(.center)
 
             Button(action: retry) {
-                Text("Retry", bundle: .module)
+                Text(.globalRetry)
             }
                 .buttonStyle(.bordered)
                 .foregroundColor(.designSystem(.text(.accent)))

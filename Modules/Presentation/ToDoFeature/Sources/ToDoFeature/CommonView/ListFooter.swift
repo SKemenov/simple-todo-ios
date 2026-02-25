@@ -40,7 +40,7 @@ private extension ListFooter {
     }
 
     var totalCount: some View {
-        Text("\(counter) tasks", bundle: .module)
+        Text(.footerCounter(counter))
             .font(.designSystem(.caption))
             .foregroundStyle(.designSystem(.text(.primary)))
     }
@@ -48,7 +48,7 @@ private extension ListFooter {
 
 #if DEBUG
 #Preview("List Footer - Russian") {
-    ListFooter(counter: 21) { print("tapped") }
+    ListFooter(counter: 31) { print("tapped") }
         .preferredColorScheme(.dark)
         .environment(\.locale, Locale(identifier: "RU"))
 }

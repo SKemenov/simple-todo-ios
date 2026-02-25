@@ -1,42 +1,25 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-      "shouldTranslate" : false
-    },
-    "button to create your first ToDo" : {
+    "dsEmpty SearchDescription" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "button to create your first ToDo"
+            "value" : "Try to search another one"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "чтобы создать Задачу"
+            "value" : "Попробуйте поискать что-то другое"
           }
         }
       }
     },
-    "No ToDos yet" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No ToDos yet"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Тут ещё нет Задач"
-          }
-        }
-      }
-    },
-    "Not Found" : {
+    "dsEmpty SearchTitle" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -52,7 +35,42 @@
         }
       }
     },
-    "Retry" : {
+    "dsEmpty StateDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "button to create your first ToDo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "чтобы создать Задачу"
+          }
+        }
+      }
+    },
+    "dsEmpty StateTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No ToDos yet"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тут ещё нет Задач"
+          }
+        }
+      }
+    },
+    "global Retry" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -68,18 +86,8 @@
         }
       }
     },
-    "Search" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search"
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
-    "Tap the" : {
+    "global Tap" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -95,18 +103,19 @@
         }
       }
     },
-    "Try to search another one" : {
+    "globalSearch" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Try to search another one"
+            "value" : "Search"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Попробуйте поискать что-то другое"
+            "value" : "Search"
           }
         }
       }

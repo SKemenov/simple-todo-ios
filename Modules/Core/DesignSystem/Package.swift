@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "DesignSystem",
-    defaultLocalization: "ru",
+    defaultLocalization: "en",
     platforms: [.iOS(.v16)],
     products: [
         .library(

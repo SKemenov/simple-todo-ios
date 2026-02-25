@@ -37,7 +37,7 @@ public struct DSSearchBar: View {
 
 private extension DSSearchBar {
     var searchTextField: some View {
-        TextField("", text: $searchText, prompt: Text("Search"))
+        TextField(text: $searchText, prompt: Text(.globalSearch)) {}
             .font(.designSystem(.body))
             .foregroundStyle(.designSystem(.text(.primary)))
             .autocorrectionDisabled(true)

@@ -31,7 +31,7 @@ public struct ToDoDetailScreen: View {
                 Button(action: saveAndExit) {
                     HStack {
                         Image(systemName: "chevron.backward")
-                        Text("Back", bundle: .module)
+                        Text(.globalBack)
                     }
                     .font(.designSystem(.callout))
                 }
@@ -46,7 +46,7 @@ public struct ToDoDetailScreen: View {
 
 private extension ToDoDetailScreen {
     var todoTitle: some View {
-        TextField("", text: $vm.title, prompt: textPrompt("ToDo title"), axis: .vertical)
+        TextField(text: $vm.title, prompt: textPrompt(.detailViewTitle), axis: .vertical) {}
             .font(.designSystem(.titleLarge))
             .foregroundStyle(.designSystem(.text(.primary)))
             .autocorrectionDisabled(false)
@@ -57,14 +57,14 @@ private extension ToDoDetailScreen {
     }
 
     var todoDate: some View {
-        Text("\(vm.createdAt)")
+        Text(verbatim: vm.createdAt)
             .font(.designSystem(.caption))
             .foregroundStyle(.designSystem(.text(.secondary)))
             .padding(.bottom, .DS.Spacing.small)
     }
 
     var todoDescription: some View {
-        TextField("", text: $vm.description, prompt: textPrompt("ToDo detail"), axis: .vertical)
+        TextField(text: $vm.description, prompt: textPrompt(.detailViewDescription), axis: .vertical) {}
             .font(.designSystem(.body))
             .foregroundStyle(.designSystem(.text(.primary)))
             .autocorrectionDisabled(false)
@@ -81,8 +81,8 @@ private extension ToDoDetailScreen {
         }
     }
 
-    func textPrompt(_ text: String.LocalizationValue) -> Text {
-        Text(LocalizedStringResource(text, bundle: .module))
+    func textPrompt(_ text: LocalizedStringResource) -> Text {
+        Text(text)
             .foregroundColor(.designSystem(.text(.primary)))
     }
 
