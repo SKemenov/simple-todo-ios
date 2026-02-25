@@ -2,124 +2,10 @@
   "sourceLanguage" : "ru",
   "strings" : {
     "" : {
-      "shouldTranslate" : false
+
     },
-    "%@" : {
-      "shouldTranslate" : false
-    },
-    "%lld tasks" : {
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld tasks"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld tasks"
-                }
-              },
-              "zero" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld tasks"
-                }
-              }
-            }
-          }
-        },
-        "ru" : {
-          "variations" : {
-            "plural" : {
-              "few" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld задачи"
-                }
-              },
-              "many" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld задач"
-                }
-              },
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld задача"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld задач"
-                }
-              },
-              "zero" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "нет задач"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Back" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Back"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Назад"
-          }
-        }
-      }
-    },
-    "Clear CoreData (no confirmation)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear CoreData (no confirmation)"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Очистить CoreData (без подтверждения)"
-          }
-        }
-      }
-    },
-    "Completed" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Completed"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "завершена"
-          }
-        }
-      }
-    },
-    "CoreData has %lld records." : {
+    "coreDataCounter(%lld)" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -139,7 +25,7 @@
               "zero" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "CoreData has %lld records"
+                  "value" : "CoreData has no records"
                 }
               }
             }
@@ -183,23 +69,124 @@
         }
       }
     },
-    "Created at: %@" : {
+    "detailViewDescription" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Created at: %@"
+            "value" : "ToDo detail"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Создана: %@"
+            "value" : "Подробная информация"
           }
         }
       }
     },
-    "Delete" : {
+    "detailViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ToDo title"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название задачи"
+          }
+        }
+      }
+    },
+    "footerCounter(%lld)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld task"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tasks"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "No tasks"
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld задачи"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld задач"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld задача"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld задач"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "нет задач"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "globalBack" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назад"
+          }
+        }
+      }
+    },
+    "globalDelete" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -215,23 +202,8 @@
         }
       }
     },
-    "Details: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Details: %@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Описание: %@"
-          }
-        }
-      }
-    },
-    "Edit" : {
+    "globalEdit" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -243,6 +215,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Редактировать"
+          }
+        }
+      }
+    },
+    "globalShare" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поделиться"
           }
         }
       }
@@ -263,7 +252,76 @@
         }
       }
     },
-    "Open ToDoList" : {
+    "listViewNavTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ToDos"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Задачи"
+          }
+        }
+      }
+    },
+    "rootViewClearCoreDataButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear CoreData (no confirmation)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить CoreData (без подтверждения)"
+          }
+        }
+      }
+    },
+    "rootViewDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Here you can open ToDoList or clear CoreData local store if needed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы можете открыть ToDoList или очистить CoreData при необходимости"
+          }
+        }
+      }
+    },
+    "rootViewHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There's a root view"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Это базовый экран"
+          }
+        }
+      }
+    },
+    "rootViewOpenListButton" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -279,39 +337,42 @@
         }
       }
     },
-    "rootView.detailDescription" : {
+    "todoCreated(%@)" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Here you can open ToDoList or clear CoreData local store if needed"
+            "state" : "translated",
+            "value" : "Created at: %@"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Вы можете открыть ToDoList или очистить CoreData при необходимости"
+            "value" : "Создана: %@"
           }
         }
       }
     },
-    "Share" : {
+    "todoDetail(%@)" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share"
+            "value" : "Details: %@"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Поделиться"
+            "value" : "Описание: %@"
           }
         }
       }
     },
-    "Status: %@" : {
+    "todoStatus(%@)" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -327,55 +388,42 @@
         }
       }
     },
-    "There's a root view." : {
+    "todoStatusCompleted" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "There's a root view"
+            "state" : "translated",
+            "value" : "Completed"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Это базовый экран"
+            "value" : "завершена"
           }
         }
       }
     },
-    "ToDo detail" : {
+    "todoStatusInProgress" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ToDo detail"
+            "value" : "In Progress"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Подробная информация"
+            "value" : "в работе"
           }
         }
       }
     },
-    "ToDo title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ToDo title"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Название задачи"
-          }
-        }
-      }
-    },
-    "ToDo: %@" : {
+    "todoTitle(%@)" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -387,22 +435,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Задача: %@"
-          }
-        }
-      }
-    },
-    "ToDos" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ToDos"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Задачи"
           }
         }
       }

@@ -24,8 +24,8 @@ public final class ToDoListViewModel: ObservableObject {
         : todos.filter { $0.searchable.contains(searchText) }
     }
     var todosCount: Int { filteredTodos.count }
-    var hasTodos: Bool { !todos.isEmpty }
-    var hasFilteredTodos: Bool { !filteredTodos.isEmpty }
+    var isTodosEmpty: Bool { todos.isEmpty }
+    var isFilteredTodosEmpty: Bool { filteredTodos.isEmpty }
 
     private let getAllToDosUseCase: GetAllToDosUseCaseProtocol
     private let deleteToDoUseCase: DeleteToDoUseCaseProtocol
@@ -57,17 +57,19 @@ public final class ToDoListViewModel: ObservableObject {
     }
 
     func exportToDo(_ todo: UIModel.ToDo) -> String {
-        let title = LocalizedStringResource("ToDo: \(todo.title)", bundle: .module)
-        let description = LocalizedStringResource("Details: \(todo.description)", bundle: .module)
-        let complete = LocalizedStringResource("Completed", bundle: .module)
-        let incomplete = LocalizedStringResource("In Progress", bundle: .module)
-        let status = LocalizedStringResource("Status: \(todo.isCompleted ? complete : incomplete)", bundle: .module)
-        let createAt = LocalizedStringResource("Created at: \(todo.createAt)", bundle: .module)
-        let exportText = "\(String(localized: title))\n"
-            + "\(String(localized: status))\n"
-            + "\(String(localized: createAt))"
-            + "\(todo.description.isEmpty ? "" : "\n" + String(localized: description))"
-        return exportText
+        let newLine = "\n"
+        let complete = String(localized: LocalizedStringResource.todoStatusCompleted)
+        let incomplete = String(localized: LocalizedStringResource.todoStatusInProgress)
+
+        let title = String(localized: LocalizedStringResource.todoTitle(todo.title))
+        let createAt = String(localized: LocalizedStringResource.todoCreated(todo.createAt))
+
+        let status = String(localized: LocalizedStringResource.todoStatus(todo.isCompleted ? complete : incomplete))
+        let description = todo.description.isEmpty
+            ? String()
+            : newLine + String(localized: LocalizedStringResource.todoDetail(todo.description))
+
+        return title + newLine + status + newLine + createAt + description
     }
 
     nonisolated

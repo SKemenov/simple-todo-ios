@@ -19,26 +19,16 @@ public struct ToDoListScreen: View {
     
     public var body: some View {
         NavigationStack {
-            Group {
-                if vm.hasTodos {
-                    VStack(spacing: .DS.Spacing.xLarge) {
-
-                        DSSearchBar(text: $vm.searchText)
-
-                        if vm.hasFilteredTodos {
-                            toDosList
-                        } else {
-                            noFilteredTodos
-                        }
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(.designSystem(.background(.primary)))
-                } else {
-                    noTodos
-                }
+            VStack(spacing: .DS.Spacing.xLarge) {
+                DSSearchBar(text: $vm.searchText)
+                toDosList
+                    .overlay { noFilteredTodos }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.designSystem(.background(.primary)))
+            .overlay { noTodos }
             .simultaneousGesture(DragGesture().onChanged { _ in hideKeyboard() })
-            .navigationTitle(LocalizedStringResource("ToDos", bundle: .module))
+            .navigationTitle(.listViewNavTitle)
             .overlay(alignment: .bottom) { footer }
         }
         .background(.designSystem(.background(.primary)))
@@ -81,16 +71,22 @@ private extension ToDoListScreen {
         }
     }
 
+    @ViewBuilder
     var noTodos: some View {
-        DSEmptyState()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.designSystem(.background(.primary)))
+        if vm.isTodosEmpty {
+            DSEmptyState()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.designSystem(.background(.primary)))
+        }
     }
 
+    @ViewBuilder
     var noFilteredTodos: some View {
-        DSEmptyState(isSearch: true)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.designSystem(.background(.primary)))
+        if vm.isFilteredTodosEmpty {
+            DSEmptyState(isSearch: true)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.designSystem(.background(.primary)))
+        }
     }
 
     @ViewBuilder
@@ -123,11 +119,11 @@ private extension ToDoListScreen {
 
     @ViewBuilder
     func contextMenu(for toDo: UIModel.ToDo) -> some View {
-        Button(LocalizedStringResource("Edit", bundle: .module), systemImage: .DS.Icons.edit) {
+        Button(.globalEdit, systemImage: .DS.Icons.edit) {
             coordinator.push(page: .toDoDetail(model: toDo))
         }
-        ShareLink(LocalizedStringResource("Share", bundle: .module), item: vm.exportToDo(toDo))
-        Button(LocalizedStringResource("Delete", bundle: .module), systemImage: .DS.Icons.delete, role: .destructive) {
+        ShareLink(.globalShare, item: vm.exportToDo(toDo))
+        Button(.globalDelete, systemImage: .DS.Icons.delete, role: .destructive) {
             Task { try await vm.deleteToDo(id: toDo.id) }
         }
     }
