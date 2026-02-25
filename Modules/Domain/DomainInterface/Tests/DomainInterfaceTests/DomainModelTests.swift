@@ -8,6 +8,7 @@
 import Testing
 @testable import DomainInterface
 import Foundation
+import Utilities
 
 @Suite("Domain ToDo models")
 struct DomainModelTests {
@@ -36,13 +37,10 @@ struct DomainModelTests {
     @Test("Hashable consistency – same values same hash")
     func hashable() {
         let id = UUID()
-        let sutA = DomainModel.ToDo(id: id, todoTitle: "Test")
-        let sutB = DomainModel.ToDo(id: id, todoTitle: "Test")
+        let date = Current.date()
+        let sutA = DomainModel.ToDo(id: id, todoTitle: "Test", createAt: date)
+        let sutB = DomainModel.ToDo(id: id, todoTitle: "Test", createAt: date)
 
-        /// Sometimes `Hasher` can be failed, because of it's algorithm, see the doc quote here:
-        ///
-        ///   The hash algorithm implemented by `Hasher` may itself change between any two
-        ///   versions of the standard library.
         var hasherA = Hasher(), hasherB = Hasher()
         sutA.hash(into: &hasherA)
         sutB.hash(into: &hasherB)

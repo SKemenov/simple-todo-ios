@@ -56,7 +56,7 @@ struct CoreDataToDoLocalDataSourceTests {
     @Test("saveToDo updates existing record")
     mutating func saveUpdatesExisting() async throws {
         // First save
-        try await sut.clearCache()
+        let initialCount = try await countOfTodos()
         let id = UUID()
         let todo = DomainModel.ToDo(id: id, todoTitle: "Original", isCompleted: false, userId: 1)
         try await sut.saveToDo(todo)
@@ -72,19 +72,19 @@ struct CoreDataToDoLocalDataSourceTests {
         let found = all.first { $0.id == id }
         #expect(found?.todoTitle == "Modified title")
         #expect(found?.isCompleted == true)
-        #expect(all.count == 1) // still one record
+        #expect(all.count == initialCount + 1) // delta is still one record
     }
 
     @Test("clearCache removes all records")
     mutating func clearCache() async throws {
-        try await sut.clearCache()
-        // Pre-fill
-        for i in 1...5 {
+        let initialCount = try await countOfTodos()
+        let addedCount = 5
+        for i in 0..<addedCount {
             let todo = DomainModel.ToDo(todoTitle: "Item \(i)")
             try await sut.saveToDo(todo)
         }
 
-        #expect(try await countOfTodos() == 5)
+        #expect(try await countOfTodos() == initialCount + addedCount)
 
         try await sut.clearCache()
         
@@ -95,13 +95,13 @@ struct CoreDataToDoLocalDataSourceTests {
     @Test("syncAllTodos inserts new items only")
     mutating func syncNewItems() async throws {
         let initialCount = try await countOfTodos()
-        
-        let dtos = (1...10).map { i in
+        let addedCount = 10
+        let dtos = (0..<addedCount).map { i in
             DomainModel.ToDo(todoTitle: "Sync \(i)")
         }
         
         try await sut.syncAllTodos(dtos)
         
-        #expect(try await countOfTodos() == initialCount + 10)
+        #expect(try await countOfTodos() == initialCount + addedCount)
     }
 }
