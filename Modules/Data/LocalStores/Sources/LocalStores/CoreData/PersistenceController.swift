@@ -14,23 +14,8 @@ public struct PersistenceController {
     public static let shared = PersistenceController()
 
     #if DEBUG
-    // For test & previews
-    public static let inMemory: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        let todos = MockFileLoader.load("todos")
-
-        for todo in todos {
-            let model = CDToDo(context: viewContext)
-            model.update(from: todo)
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            Logger.storage.critical("\(String.logHeader()) Unresolved error \(error)")
-        }
-        return result
-    }()
+    // For tests
+    public static let inMemory = PersistenceController(inMemory: true)
     #endif
 
     private init(inMemory: Bool = false) {
