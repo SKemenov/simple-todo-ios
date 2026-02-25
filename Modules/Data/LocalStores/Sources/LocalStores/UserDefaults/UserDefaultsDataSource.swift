@@ -7,12 +7,14 @@
 
 import Foundation
 import DataInterface
-import Utilities
 import Logging
 
 public final class UserDefaultsDataSource: UserDefaultsDataSourceProtocol {
     private let userDefaults = UserDefaults.standard
-    private let coreDataKey = "is_core_data_synced"
+    private enum Keys {
+        static let coreDataKey = "is_core_data_synced"
+        static let launchKey = "is_app_already_has_first_launch"
+    }
 
     public init() {
         Logger.storage.info("\(String.logHeader()) Started")
@@ -23,7 +25,12 @@ public final class UserDefaultsDataSource: UserDefaultsDataSourceProtocol {
     }
 
     public var isCoreDataSynced: Bool {
-        get { userDefaults.bool(forKey: coreDataKey) }
-        set { userDefaults.set(newValue, forKey: coreDataKey) }
+        get { userDefaults.bool(forKey: Keys.coreDataKey) }
+        set { userDefaults.set(newValue, forKey: Keys.coreDataKey) }
+    }
+
+    public var isAppAlreadyHasFirstLaunch: Bool {
+        get { userDefaults.bool(forKey: Keys.launchKey) }
+        set { userDefaults.set(newValue, forKey: Keys.launchKey) }
     }
 }
