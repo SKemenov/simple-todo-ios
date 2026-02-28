@@ -35,15 +35,15 @@ public struct DSRow<Leading: View, Trailing: View>: View {
 
    public var body: some View {
        HStack(alignment: configuration.verticalAlignment, spacing: configuration.spacing) {
-            leading
-                .frame(maxWidth: leadingMaxWidth, alignment: .leading)
+           leading
+               .frame(maxWidth: leadingMaxWidth, alignment: .leading)
 
-            trailing
-                .frame(maxWidth: trailingMaxWidth, alignment: .trailing)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(padding)
-    }
+           trailing
+               .frame(maxWidth: trailingMaxWidth, alignment: .trailing)
+       }
+       .frame(maxWidth: .infinity, alignment: .leading)
+       .padding(padding)
+   }
 }
 
 public enum DSRowStyle {
