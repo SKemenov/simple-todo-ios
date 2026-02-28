@@ -43,7 +43,7 @@ struct ToDoUseCasesTests {
         let saved2 = try await mockRepo.fetchAllToDos()
         #expect(saved2.count == 2)
         #expect(saved2.last?.todoTitle == "Call mom")
-        #expect(saved2.last?.todoDescription == "")
+        #expect(saved2.last?.todoDescription.isEmpty == true)
     }
 
     @Test("Create throws when repository fails")
