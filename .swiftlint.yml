@@ -1,4 +1,4 @@
-# custom SwiftLint config file. Last version 2025-05-05, edited by skemenov
+# custom SwiftLint config file. Last version 2026-03-05, edited by skemenov
 #
 # Insert this in Run Script and disable sandboxing for scripts
 #
@@ -84,12 +84,14 @@ attributes:
     - "@objc"
     - "@Environment"
     - "@AppStorage"
+#    - "@ViewBuilder"
   always_on_line_above:
     - "@ConfigurationElement"
     - "@OptionGroup"
     - "@RuleConfigurationDescriptionBuilder"
     - "@MainActor"
-    - "@ViewBuilder"
+#    - "@ViewBuilder"
+    - "@ToolbarContentBuilder"
 
 large_tuple: 3
 number_separator:
@@ -164,4 +166,3 @@ trailing_whitespace:
 
 #switch_case_alignment:
 #  indented_cases: true
-
