@@ -22,9 +22,11 @@ struct StringExtensionsTests {
         #expect(sut != Current.date())
         // We expect a date on the local midnight of that day, so need to use .inLocalTime()
         sut = sut.inLocalTime()
+        // swiftlint:disable force_unwrapping
         #expect(Calendar.current.component(.day, from: sut) == Int(input.prefix(2))!)
         #expect(Calendar.current.component(.month, from: sut) == Int(input.prefix(5).suffix(2))!)
         #expect(Calendar.current.component(.year, from: sut) == Int(input.suffix(4))!)
+        // swiftlint:enable force_unwrapping
     }
 
     @Test("makeDateFromStamp falls back to now on invalid input")
@@ -39,7 +41,7 @@ struct StringExtensionsTests {
 
     @Test("logHeader produces expected format")
     func logHeader() {
-        var sut  = ""
+        var sut = ""
         sut = String.logHeader(fileID: "SomeFile.swift", function: "init()")
         #expect(sut.hasPrefix("[SomeFile.init]"))
 

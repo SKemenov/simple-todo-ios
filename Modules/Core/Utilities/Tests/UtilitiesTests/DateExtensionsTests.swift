@@ -5,7 +5,6 @@
 //  Created by Sergey Kemenov on 19.02.2026.
 //
 
-
 import Testing
 @testable import Utilities
 import Foundation
@@ -63,9 +62,9 @@ struct DateExtensionsTests {
     }
 
     @Test("addMonth preserves day-of-month when possible", arguments: [
-        (Date(timeIntervalSince1970: 1_767_214_800), 1,  1_769_893_200), // Jan 01 → Feb 01
+        (Date(timeIntervalSince1970: 1_767_214_800), 1, 1_769_893_200), // Jan 01 → Feb 01
         (Date(timeIntervalSince1970: 1_769_893_200), -1, 1_767_214_800), // Feb 01 → Jan 01
-        (Date(timeIntervalSince1970: 1_769_806_800), 1,  1_772_226_000), // Jan 31 → Feb 29/28 (leap year handling)
+        (Date(timeIntervalSince1970: 1_769_806_800), 1, 1_772_226_000), // Jan 31 → Feb 29/28 (leap year handling)
     ])
     func addMonth(input: Date, months: Int, expectedInterval: TimeInterval) {
         let sut = input.addMonth(months)
@@ -90,7 +89,7 @@ struct DateExtensionsTests {
     func addSec() {
         let start = referenceDate
 
-        let sut = start.addSec(60*60) // +1 hour
-        #expect(sut.timeIntervalSince(start) == 60*60)
+        let sut = start.addSec(60 * 60) // +1 hour
+        #expect(sut.timeIntervalSince(start) == 60 * 60)
     }
 }
