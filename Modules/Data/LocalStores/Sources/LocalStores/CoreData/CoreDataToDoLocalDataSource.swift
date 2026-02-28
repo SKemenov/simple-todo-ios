@@ -40,8 +40,8 @@ public actor CoreDataToDoLocalDataSource: ToDoLocalDataSourceProtocol {
         try await persistence.performBackground { context in
             let request = CDToDo.fetchRequest()
             request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-            guard let cd = try context.fetch(request).first else { return nil }
-            return cd.toDomain()
+            guard let model = try context.fetch(request).first else { return nil }
+            return model.toDomain()
         }
     }
 
