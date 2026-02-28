@@ -15,7 +15,7 @@ import Utilities
 public final class AppCoordinator: ObservableObject {
     public let container: GetFeatureViewModelsProtocol
 
-    @Published public var path: NavigationPath = NavigationPath()
+    @Published public var path = NavigationPath()
     // No need to implement .sheet and .fullScreenCover for this app
     @Published public var isNeedToShowList: Bool = false
 

@@ -1,6 +1,6 @@
 //
 //  ToDoListScreen.swift
-//  BlogPostFeature
+//  ToDoFeature
 //
 //  Created by Sergey Kemenov on 07.02.2026.
 //
@@ -16,21 +16,19 @@ public struct ToDoListScreen: View {
     public init(vm: ToDoListViewModel) {
         _vm = StateObject(wrappedValue: vm)
     }
-    
+
     public var body: some View {
-        NavigationStack {
-            VStack(spacing: .DS.Spacing.xLarge) {
-                DSSearchBar(text: $vm.searchText)
-                toDosList
-                    .overlay { noFilteredTodos }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.designSystem(.background(.primary)))
-            .overlay { noTodos }
-            .simultaneousGesture(DragGesture().onChanged { _ in hideKeyboard() })
-            .navigationTitle(.listViewNavTitle)
-            .overlay(alignment: .bottom) { footer }
+        VStack(spacing: .DS.Spacing.xLarge) {
+            DSSearchBar(text: $vm.searchText)
+            toDosList
+                .overlay { noFilteredTodos }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.designSystem(.background(.primary)))
+        .simultaneousGesture(DragGesture().onChanged { _ in hideKeyboard() })
+        .navigationTitle(.listViewNavTitle)
+        .overlay { noTodos }
+        .overlay(alignment: .bottom) { footer }
         .background(.designSystem(.background(.primary)))
         .overlay { progress }
         .overlay { errorView }
