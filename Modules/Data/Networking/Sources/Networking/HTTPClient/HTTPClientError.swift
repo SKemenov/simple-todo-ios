@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum HTTPClientError: LocalizedError {
     case invalidServerResponse
     case internalError

@@ -50,7 +50,7 @@ final class HTTPRequestBuilder {
                 request.addValue(value, forHTTPHeaderField: key)
             }
         }
-        
+
         if let rawBody {
             request.httpBody = rawBody
         }
