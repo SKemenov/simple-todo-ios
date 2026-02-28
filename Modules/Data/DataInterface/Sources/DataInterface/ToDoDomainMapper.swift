@@ -5,7 +5,6 @@
 //  Created by Sergey Kemenov on 09.02.2026.
 //
 
-
 import Foundation
 import DomainInterface
 import Utilities
