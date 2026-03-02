@@ -34,9 +34,11 @@ struct DTOModelsTests {
 
     @Test("Minimal required fields decode correctly")
     func minimalDecoding() throws {
+        // swiftlint:disable all
         let json = """
         {"id":123,"todo":"Test","completed":false,"userId":1}
         """.data(using: .utf8)!
+        // swiftlint:enable all
 
         let sut = try JSONDecoder().decode(DTOModel.ToDo.self, from: json)
         #expect(sut.id == 123)
