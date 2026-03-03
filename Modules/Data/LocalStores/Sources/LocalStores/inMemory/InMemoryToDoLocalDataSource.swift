@@ -38,7 +38,7 @@ public final class InMemoryToDoLocalDataSource: ToDoLocalDataSourceProtocol {
     }
 
     public func getToDo(id: UUID) async throws -> DomainInterface.DomainModel.ToDo? {
-        toDos.filter { $0.id == id }.first
+        toDos.first(where: { $0.id == id })
     }
 
     public func deleteToDo(id: UUID) async throws {
@@ -56,4 +56,3 @@ public final class InMemoryToDoLocalDataSource: ToDoLocalDataSourceProtocol {
     }
 }
 #endif
-
