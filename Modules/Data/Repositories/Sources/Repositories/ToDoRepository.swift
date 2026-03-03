@@ -56,14 +56,14 @@ public final class ToDoRepository: ToDoRepositoryProtocol {
     public func createToDo(_ model: DomainModel.ToDo) async throws {
         try await localDataSource.saveToDo(model)
         let dto = ToDoDomainMapper.toDTO(model)
-        let _ = try await remoteDataSource.createToDo(dto)
+        _ = try await remoteDataSource.createToDo(dto)
         Logger.repos.debug("\(String.logHeader()) Created toDo: [\(model)]")
     }
 
     public func updateToDo(_ model: DomainModel.ToDo) async throws {
         try await localDataSource.saveToDo(model)
         let dto = ToDoDomainMapper.toDTO(model)
-        let _ = try await remoteDataSource.updateToDo(dto)
+        _ = try await remoteDataSource.updateToDo(dto)
         Logger.repos.debug("\(String.logHeader()) Updated toDo: [\(model)]")
     }
 
