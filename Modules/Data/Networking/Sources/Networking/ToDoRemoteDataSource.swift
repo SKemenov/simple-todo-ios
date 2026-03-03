@@ -16,7 +16,7 @@ public final class ToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
     public init() {
         Logger.network.info("\(String.logHeader()) Started")
     }
-    
+
     public func fetchAllToDos() async throws -> DTOModel.ToDos {
         let request = try buildRequest(for: .fetchAllToDos)
         let responseData = try await sendRequest(request)
@@ -67,7 +67,7 @@ public final class ToDoRemoteDataSource: ToDoRemoteDataSourceProtocol {
 
     public func deleteToDo(id: Int) async throws {
         let request = try buildRequest(for: .deleteToDo(id: id))
-        let _ = try await sendRequest(request)
+        _ = try await sendRequest(request)
         Logger.network.info("\(String.logHeader()) Deleted toDo with id: [\(id)]")
     }
 
