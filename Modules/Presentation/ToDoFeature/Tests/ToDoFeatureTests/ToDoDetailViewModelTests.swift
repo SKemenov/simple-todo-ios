@@ -54,7 +54,7 @@ struct ToDoDetailViewModelTests {
             createAt: "",
             isCompleted: false
         )
-        
+
         let sut = ToDoDetailViewModel(
             createUseCase: MockCreateToDoUseCase(),
             updateUseCase: MockUpdateToDoUseCase(),
@@ -70,7 +70,7 @@ struct ToDoDetailViewModelTests {
     func editCallsUpdate() async throws {
         let mockUpdate = MockUpdateToDoUseCase()
         let existingId = UUID()
-        
+
         let sut = ToDoDetailViewModel(
             createUseCase: MockCreateToDoUseCase(),
             updateUseCase: mockUpdate,
@@ -78,7 +78,7 @@ struct ToDoDetailViewModelTests {
         )
         await sut.loadData()
         sut.title = "Updated title"
-        
+
         await sut.saveData()
 
         #expect(mockUpdate.callCount == 1)
