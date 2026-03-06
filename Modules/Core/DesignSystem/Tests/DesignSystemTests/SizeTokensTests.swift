@@ -5,7 +5,6 @@
 //  Created by Sergey Kemenov on 19.02.2026.
 //
 
-
 import Testing
 @testable import DesignSystem
 import Foundation
