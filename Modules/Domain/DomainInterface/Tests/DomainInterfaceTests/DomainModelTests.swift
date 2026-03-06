@@ -48,7 +48,6 @@ struct DomainModelTests {
         #expect(hasherA.finalize() == hasherB.finalize())
     }
 
-
     @Test("Identifiable — id is the identity")
     func identifiable() {
         let id = UUID()

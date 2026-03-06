@@ -41,7 +41,7 @@ private extension DSSearchBar {
             .font(.designSystem(.body))
             .foregroundStyle(.designSystem(.text(.primary)))
             .autocorrectionDisabled(true)
-            .autocapitalization(.none)
+            .textInputAutocapitalization(.never)
             .keyboardType(.default)
             .focused($isFocused)
             .onSubmit(hideKeyboard)
@@ -66,7 +66,6 @@ private extension View {
             .contentShape(Rectangle())
     }
 }
-
 
 #Preview {
     VStack {

@@ -17,8 +17,8 @@ public final class UpdateToDoUseCase: UpdateToDoUseCaseProtocol {
     }
 
     public func execute(id: UUID, title: String, description: String) async throws {
-        var checkedTitle = validator.validateTitle(title)
-        var checkedDescription = validator.validateDescription(description)
+        let checkedTitle = validator.validateTitle(title)
+        let checkedDescription = validator.validateDescription(description)
 
         guard !checkedTitle.isEmpty, !checkedDescription.isEmpty else {
             return // Nothing to update

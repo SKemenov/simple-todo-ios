@@ -1,6 +1,6 @@
 //
 //  ToDoListViewModel.swift
-//  BlogPostFeature
+//  ToDoFeature
 //
 //  Created by Sergey Kemenov on 07.02.2026.
 //
