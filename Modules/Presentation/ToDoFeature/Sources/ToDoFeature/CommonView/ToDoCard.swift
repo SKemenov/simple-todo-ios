@@ -8,23 +8,28 @@
 import SwiftUI
 import DesignSystem
 
-public struct ToDoCard: View {
+public struct ToDoCard: View, Equatable {
     let toDo: UIModel.ToDo
-    let action: () -> Void
+    let onComplete: () -> Void
+    let onDelete: () -> Void
     private let isLast: Bool
-    @EnvironmentObject private var coordinator: AppCoordinator
 
-    public init(_ toDo: UIModel.ToDo, isLast: Bool, action: @escaping () -> Void) {
+    public static func == (lhs: ToDoCard, rhs: ToDoCard) -> Bool {
+        lhs.toDo == rhs.toDo && lhs.isLast == rhs.isLast
+    }
+
+    public init(_ toDo: UIModel.ToDo, isLast: Bool, onComplete: @escaping () -> Void, onDelete: @escaping () -> Void) {
         self.toDo = toDo
-        self.action = action
+        self.onComplete = onComplete
+        self.onDelete = onDelete
         self.isLast = isLast
     }
 
     public var body: some View {
         VStack(spacing: .zero) {
             DSRow(
-                leading: { completeButton },
-                trailing: { detail }
+                leading: { Button(action: onComplete) { DSToggle(isSelected: toDo.isCompleted) } },
+                trailing: { ToDoCardDetail(toDo, onDelete: onDelete) }
             )
             .dsRowPrimaryElement(.trailing)
             .dsRowSpacing(.DS.Spacing.xxSmall)
@@ -38,22 +43,7 @@ public struct ToDoCard: View {
 }
 
 private extension ToDoCard {
-    var completeButton: some View {
-        Button(action: action) {
-            DSToggle(isSelected: toDo.isCompleted)
-        }
-    }
-
-    var detail: some View {
-        ToDoCardDetail(toDo)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                coordinator.push(page: .toDoDetail(model: toDo))
-            }
-    }
-
-    @ViewBuilder
-    var divider: some View {
+    @ViewBuilder var divider: some View {
         if !isLast {
             Rectangle()
                 .fill(.designSystem(.border(.primary)))
@@ -64,14 +54,19 @@ private extension ToDoCard {
 
 #if DEBUG
 #Preview {
-    ToDoCard(UIModel.ToDo(
-        id: UUID(),
-        title: "Task",
-        description: "some description",
-        createAt: Date().createDateStamp(),
-        isCompleted: false
-    ), isLast: false, action: {})
-    .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+    ToDoCard(
+        UIModel.ToDo(
+            id: UUID(),
+            title: "Task",
+            description: "some description",
+            createAt: Date().createDateStamp(),
+            isCompleted: false
+        ),
+        isLast: false,
+        onComplete: {},
+        onDelete: {}
+    )
+    .environmentObject(AppCoordinator(container: UIMockAppDIContainer()))
     .preferredColorScheme(.dark)
 }
 #endif
