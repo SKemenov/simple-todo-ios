@@ -8,14 +8,34 @@
 import SwiftUI
 import DesignSystem
 
-public struct ToDoCardDetail: View {
+public struct ToDoCardDetail: View, Equatable {
     let toDo: UIModel.ToDo
+    let onDelete: () -> Void
+    @EnvironmentObject private var coordinator: AppCoordinator
 
-    public init(_ toDo: UIModel.ToDo) {
+    public init(_ toDo: UIModel.ToDo, onDelete: @escaping () -> Void) {
         self.toDo = toDo
+        self.onDelete = onDelete
     }
 
     public var body: some View {
+        content
+            .contentShape(.contextMenuPreview, Rectangle())
+            .onTapGesture(perform: openDetail)
+            .contextMenu {
+                Button(.globalEdit, systemImage: .DS.Icons.edit, action: openDetail)
+                ShareLink(.globalShare, item: toDo.exportAsString)
+                Button(.globalDelete, systemImage: .DS.Icons.delete, role: .destructive, action: onDelete)
+            }
+    }
+
+    public static func == (lhs: ToDoCardDetail, rhs: ToDoCardDetail) -> Bool {
+        lhs.toDo == rhs.toDo
+    }
+}
+
+private extension ToDoCardDetail {
+    @ViewBuilder var content: some View {
         VStack(alignment: .leading, spacing: .DS.Spacing.xSmall) {
             header
             if !toDo.description.isEmpty {
@@ -25,11 +45,10 @@ public struct ToDoCardDetail: View {
             secondaryText(toDo.createAt)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
     }
-}
 
-private extension ToDoCardDetail {
-    var header: some View {
+    @ViewBuilder var header: some View {
         Text(toDo.title)
             .foregroundStyle(.designSystem(.text(toDo.isCompleted ? .secondary : .primary)))
             .strikethrough(toDo.isCompleted, color: .designSystem(.text(.secondary)))
@@ -37,10 +56,15 @@ private extension ToDoCardDetail {
             .setLinesLimit()
     }
 
+    @ViewBuilder
     func secondaryText(_ text: String) -> some View {
         Text(text)
             .foregroundStyle(.designSystem(.text(.secondary)))
             .font(.designSystem(.caption))
+    }
+
+    func openDetail() {
+        coordinator.push(page: .toDoDetail(model: toDo))
     }
 }
 
@@ -59,7 +83,8 @@ private extension View {
             description: "some description",
             createAt: Date().createDateStamp(),
             isCompleted: false
-        )
+        ),
+        onDelete: {}
     )
     .preferredColorScheme(.dark)
 }

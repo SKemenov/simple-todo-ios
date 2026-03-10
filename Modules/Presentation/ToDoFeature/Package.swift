@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "ToDoFeature",
     defaultLocalization: "ru",
-    platforms: [.iOS(.v16)],
+    platforms: [.iOS("16.6")],
     products: [
         .library(
             name: "ToDoFeature",
