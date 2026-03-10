@@ -8,7 +8,7 @@
 import SwiftUI
 import DesignSystem
 
-struct ListFooter: View {
+struct ListFooter: View, Equatable {
     var counter: Int
     var onCreate: () -> Void
 
@@ -26,6 +26,10 @@ struct ListFooter: View {
         .padding(.vertical, .DS.Spacing.xxLarge)
         .background(.designSystem(.background(.secondary)))
         .overlay(alignment: .trailing) { createButton }
+    }
+
+    static func == (lhs: ListFooter, rhs: ListFooter) -> Bool {
+        lhs.counter == rhs.counter
     }
 }
 

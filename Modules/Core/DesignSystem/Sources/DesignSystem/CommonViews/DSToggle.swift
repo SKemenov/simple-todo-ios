@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-public struct DSToggle: View {
+public struct DSToggle: View, Equatable {
     private var isSelected: Bool
-    @Environment(\.isEnabled) private var isEnabled
+//    @Environment(\.isEnabled) private var isEnabled
 
     public init(isSelected: Bool) {
         self.isSelected = isSelected
@@ -30,6 +30,10 @@ public struct DSToggle: View {
                 .animation(.spring(response: 0.5, dampingFraction: 0.6), value: isEnabled)
         }
         .background(.designSystem(.background(.primary)))
+    }
+
+    public static func == (lhs: DSToggle, rhs: DSToggle) -> Bool {
+        lhs.isSelected == rhs.isSelected
     }
 }
 
@@ -54,7 +58,6 @@ private extension DSToggle {
     }
 }
 
-
 #Preview {
     VStack(alignment: .leading, spacing: .DS.Spacing.small) {
         DSRow(leading: { Text("not selected, enabled") }, trailing: {
@@ -66,13 +69,13 @@ private extension DSToggle {
         })
         .padding(.bottom)
 
-        DSRow(leading: { Text("not selected, disabled") }, trailing: {
-            DSToggle(isSelected: false).disabled(true)
-        })
-
-        DSRow(leading: { Text("selected, disabled") }, trailing: {
-            DSToggle(isSelected: true).disabled(true)
-        })
+//        DSRow(leading: { Text("not selected, disabled") }, trailing: {
+//            DSToggle(isSelected: false).disabled(true)
+//        })
+//
+//        DSRow(leading: { Text("selected, disabled") }, trailing: {
+//            DSToggle(isSelected: true).disabled(true)
+//        })
     }
     .padding()
     .background(.designSystem(.background(.primary)))
