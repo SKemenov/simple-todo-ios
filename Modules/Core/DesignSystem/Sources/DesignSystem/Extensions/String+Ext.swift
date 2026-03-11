@@ -43,6 +43,12 @@ extension String.DS.Icons: CaseIterable {
     /// `warning` for "exclamationmark.triangle"
     public static let warning: String = "exclamationmark.triangle"
 
+    /// `storage` for "externaldrive.trianglebadge.exclamationmark"
+    public static let storage: String = "externaldrive.trianglebadge.exclamationmark"
+
+    /// `network` for "wifi.exclamationmark"
+    public static let network: String = "wifi.exclamationmark"
+
     /// `empty` for "doc.text"
     public static let empty: String = "doc.text"
 
