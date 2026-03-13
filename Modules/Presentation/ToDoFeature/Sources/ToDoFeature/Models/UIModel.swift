@@ -12,6 +12,38 @@ import Utilities
 public enum UIModel { }
 
 extension UIModel {
+    public struct AppError: Identifiable {
+        public let id = UUID()
+        public let kind: Kind
+        public let message: String
+        public let retry: (@Sendable () async -> Void)?
+
+        public init(kind: Kind = .general, message: String, retry: (@Sendable () async -> Void)? = nil) {
+            self.kind = kind
+            self.message = message
+            self.retry = retry
+        }
+
+        public enum Kind {
+            case network
+            case storage
+            case general
+
+            public init(from error: Error) {
+                switch error {
+                case is URLError:
+                    self = .network
+                case let nsError as NSError where nsError.domain == NSCocoaErrorDomain:
+                    self = .storage
+                default:
+                    self = .general
+                }
+            }
+        }
+    }
+}
+
+extension UIModel {
     public struct ToDo: Identifiable, Equatable, Hashable {
         public var id: UUID
         public var title: String
@@ -33,6 +65,22 @@ extension UIModel {
 
         public var formattedCreateAt: String {
             Current.date().createDateStamp()
+        }
+
+        public var exportAsString: String {
+            let newLine = "\n"
+            let complete = String(localized: LocalizedStringResource.todoStatusCompleted)
+            let incomplete = String(localized: LocalizedStringResource.todoStatusInProgress)
+
+            let title = String(localized: LocalizedStringResource.todoTitle(self.title))
+            let createAt = String(localized: LocalizedStringResource.todoCreated(self.createAt))
+
+            let status = String(localized: LocalizedStringResource.todoStatus(self.isCompleted ? complete : incomplete))
+            let description = self.description.isEmpty
+            ? String()
+            : newLine + String(localized: LocalizedStringResource.todoDetail(self.description))
+
+            return title + newLine + status + newLine + createAt + description
         }
     }
 }
