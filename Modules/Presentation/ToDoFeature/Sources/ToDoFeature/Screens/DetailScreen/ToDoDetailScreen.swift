@@ -12,9 +12,8 @@ public struct ToDoDetailScreen: View {
     @EnvironmentObject private var coordinator: AppCoordinator
     @ObservedObject private var vm: ToDoDetailViewModel
 
-    public init(vm: ToDoDetailViewModel, model: UIModel.ToDo? = nil) {
+    public init(vm: ToDoDetailViewModel) {
         _vm = .init(wrappedValue: vm)
-        vm.toDo = model
     }
     public var body: some View {
         VStack(alignment: .leading, spacing: .DS.Spacing.small) {
@@ -26,18 +25,7 @@ public struct ToDoDetailScreen: View {
         .padding(.horizontal, .DS.Spacing.xxLarge)
         .padding(.vertical, .DS.Spacing.small)
         .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: saveAndExit) {
-                    HStack {
-                        Image(systemName: "chevron.backward")
-                        Text(.globalBack)
-                    }
-                    .font(.designSystem(.callout))
-                }
-            }
-        }
-        .overlay { progress }
+        .toolbar { backToolbarContent }
         .task {
             await vm.loadData()
         }
@@ -74,16 +62,33 @@ private extension ToDoDetailScreen {
             .lineLimit(10)
     }
 
-    @ViewBuilder
-    var progress: some View {
-        if vm.isLoading {
-            ProgressView()
-        }
-    }
-
     func textPrompt(_ text: LocalizedStringResource) -> Text {
         Text(text)
             .foregroundColor(.designSystem(.text(.primary)))
+    }
+
+    @ToolbarContentBuilder
+    var backToolbarContent: some ToolbarContent {
+        if #available(iOS 26, *) {
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
+            .sharedBackgroundVisibility(.hidden)
+        } else {
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
+        }
+    }
+
+    var backButton: some View {
+        Button(action: saveAndExit) {
+            HStack {
+                Image(systemName: "chevron.backward")
+                Text(.globalBack)
+            }
+            .font(.designSystem(.callout))
+        }
     }
 
     func saveAndExit() {
