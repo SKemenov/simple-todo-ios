@@ -12,8 +12,8 @@ import SwiftUI
 @Suite("AppCoordinator Navigation")
 @MainActor
 struct AppCoordinatorTests {
-    
-    private let mockContainer = UIMockDependencyContainer()
+
+    private let mockContainer = UIMockAppDIContainer()
 
     @Test("Initial state — path empty, shows root or list based on flag, no crashes")
     func initialState() {
