@@ -17,25 +17,30 @@ struct ToDoDetailViewModelTests {
 
     private func makeViewModel(
         createUseCase: CreateToDoUseCaseProtocol = MockCreateToDoUseCase(),
-        updateUseCase: UpdateToDoUseCaseProtocol = MockUpdateToDoUseCase()
-    ) -> ToDoDetailViewModel {
-        ToDoDetailViewModel(
+        updateUseCase: UpdateToDoUseCaseProtocol = MockUpdateToDoUseCase(),
+        errorManager: ErrorManager = ErrorManager(),
+        networkState: NetworkState = NetworkState()
+    ) -> (ToDoDetailViewModel, ErrorManager) {
+        let vm = ToDoDetailViewModel(
             createUseCase: createUseCase,
-            updateUseCase: updateUseCase
+            updateUseCase: updateUseCase,
+            errorManager: errorManager,
+            networkState: networkState
         )
+        return (vm, errorManager)
     }
 
     @Test("Initial state – loading without crashing")
     func initialState() {
-        let _ = makeViewModel()
+        let (_, _) = makeViewModel()
         #expect(true)
     }
 
     @Test("create mode – save calls create use case")
     func createCallsCreateUseCase() async throws {
         let mockCreate = MockCreateToDoUseCase()
-        let sut = makeViewModel(createUseCase: mockCreate)
-        
+        let (sut, _) = makeViewModel(createUseCase: mockCreate)
+
         sut.title = "New task"
         sut.description = "Important"
         await sut.saveData()
@@ -58,7 +63,9 @@ struct ToDoDetailViewModelTests {
         let sut = ToDoDetailViewModel(
             createUseCase: MockCreateToDoUseCase(),
             updateUseCase: MockUpdateToDoUseCase(),
-            toDo: existing
+            toDo: existing,
+            errorManager: ErrorManager(),
+            networkState: NetworkState()
         )
         await sut.loadData()
 
@@ -74,7 +81,9 @@ struct ToDoDetailViewModelTests {
         let sut = ToDoDetailViewModel(
             createUseCase: MockCreateToDoUseCase(),
             updateUseCase: mockUpdate,
-            toDo: UIModel.ToDo(id: existingId, title: "Old", description: "", createAt: "", isCompleted: false)
+            toDo: UIModel.ToDo(id: existingId, title: "Old", description: "", createAt: "", isCompleted: false),
+            errorManager: ErrorManager(),
+            networkState: NetworkState()
         )
         await sut.loadData()
         sut.title = "Updated title"
@@ -84,5 +93,38 @@ struct ToDoDetailViewModelTests {
         #expect(mockUpdate.callCount == 1)
         #expect(mockUpdate.lastId == existingId)
         #expect(mockUpdate.lastTitle == "Updated title")
+    }
+
+    @Test("create mode – error pushes to ErrorManager")
+    func createErrorPushesToErrorManager() async {
+        let mockCreate = MockCreateToDoUseCase()
+        mockCreate.shouldThrow = true
+        let (sut, errorManager) = makeViewModel(createUseCase: mockCreate)
+
+        sut.title = "Fail"
+        sut.description = "This will fail"
+        await sut.saveData()
+
+        #expect(!errorManager.errors.isEmpty)
+    }
+
+    @Test("edit mode – error pushes to ErrorManager")
+    func updateErrorPushesToErrorManager() async {
+        let mockUpdate = MockUpdateToDoUseCase()
+        mockUpdate.shouldThrow = true
+        let errorManager = ErrorManager()
+        let sut = ToDoDetailViewModel(
+            createUseCase: MockCreateToDoUseCase(),
+            updateUseCase: mockUpdate,
+            toDo: UIModel.ToDo(id: UUID(), title: "Old", description: "", createAt: "", isCompleted: false),
+            errorManager: errorManager,
+            networkState: NetworkState()
+        )
+        await sut.loadData()
+        sut.title = "Updated"
+
+        await sut.saveData()
+
+        #expect(!errorManager.errors.isEmpty)
     }
 }

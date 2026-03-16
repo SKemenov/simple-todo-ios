@@ -14,8 +14,6 @@ import Utilities
 
 public final class ToDoListViewModel: ObservableObject {
     @Published var todos: [UIModel.ToDo] = []
-    @Published var isLoading = false
-    @Published var errorMessage: String?
     @Published var searchText = ""
 
     var filteredTodos: [UIModel.ToDo] {
@@ -30,28 +28,35 @@ public final class ToDoListViewModel: ObservableObject {
     private let getAllToDosUseCase: GetAllToDosUseCaseProtocol
     private let deleteToDoUseCase: DeleteToDoUseCaseProtocol
     private let completeToDoUseCase: CompleteToDoUseCaseProtocol
+    private let errorManager: ErrorManager
+    private let networkState: NetworkState
 
     public init(
         getAllToDosUseCase: GetAllToDosUseCaseProtocol,
         deleteToDoUseCase: DeleteToDoUseCaseProtocol,
-        completeToDoUseCase: CompleteToDoUseCaseProtocol
+        completeToDoUseCase: CompleteToDoUseCaseProtocol,
+        errorManager: ErrorManager,
+        networkState: NetworkState
     ) {
         self.getAllToDosUseCase = getAllToDosUseCase
         self.deleteToDoUseCase = deleteToDoUseCase
         self.completeToDoUseCase = completeToDoUseCase
+        self.errorManager = errorManager
+        self.networkState = networkState
     }
 
     @MainActor
     func loadData() async {
-        guard !isLoading else { return }
-        isLoading = true
-        errorMessage = nil
-        defer { isLoading = false }
+        guard !networkState.isLoading else { return }
+        networkState.set(true, for: String.logHeader())
+        defer { networkState.set(false, for: String.logHeader()) }
 
         do {
             todos = try await loadTodos()
         } catch {
-            errorMessage = "Failed to load todos.\n Loading error: \(error)\n Please try again."
+            errorManager.show("Failed to load todos.", kind: .init(from: error)) { [weak self] in
+                await self?.loadData()
+            }
             Logger.userFlow.error("\(String.logHeader()) Loading error: \(error)")
         }
     }
@@ -81,26 +86,24 @@ public final class ToDoListViewModel: ObservableObject {
 
     @MainActor
     func deleteToDo(id: UUID) async throws {
-        guard !isLoading else { return }
-        isLoading = true
-        errorMessage = nil
-        defer { isLoading = false }
+        guard !networkState.isLoading else { return }
+        networkState.set(true, for: String.logHeader())
+        defer { networkState.set(false, for: String.logHeader()) }
         do {
             try await deleteToDoUseCase.execute(id: id)
             todos.removeAll { $0.id == id }
             Logger.userFlow.info("\(String.logHeader()) Deleted toDo with id [\(id)]")
         } catch {
-            errorMessage = "Failed to delete todo.\n Error: \(error)\n Please try again."
+            errorManager.show("Failed to delete todo.", kind: .init(from: error))
             Logger.userFlow.error("\(String.logHeader()) Deleting error: \(error)")
         }
     }
 
     @MainActor
     func completeToDo(_ todo: UIModel.ToDo) async throws {
-        guard !isLoading else { return }
-        isLoading = true
-        errorMessage = nil
-        defer { isLoading = false }
+        guard !networkState.isLoading else { return }
+        networkState.set(true, for: String.logHeader())
+        defer { networkState.set(false, for: String.logHeader()) }
         do {
             try await completeToDoUseCase.execute(id: todo.id, isCompleted: !todo.isCompleted)
             if let index = todos.firstIndex(of: todo) {
@@ -109,7 +112,7 @@ public final class ToDoListViewModel: ObservableObject {
             let newStatus = !todo.isCompleted == true ? "Completed" : "In Progress"
             Logger.userFlow.info("\(String.logHeader()) \(newStatus) toDo [\(todo.title)]")
         } catch {
-            errorMessage = "Failed to complete todo.\n Error: \(error)\n Please try again."
+            errorManager.show("Failed to complete todo.", kind: .init(from: error))
             Logger.userFlow.error("\(String.logHeader()) Completing error: \(error)")
         }
     }

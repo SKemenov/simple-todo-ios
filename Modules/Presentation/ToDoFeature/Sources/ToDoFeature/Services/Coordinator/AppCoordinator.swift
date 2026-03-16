@@ -13,13 +13,13 @@ import Utilities
 
 @MainActor
 public final class AppCoordinator: ObservableObject {
-    public let container: GetFeatureViewModelsProtocol
+    public let container: ToDoFeatureViewModelsProtocol
 
     @Published public var path = NavigationPath()
     // No need to implement .sheet and .fullScreenCover for this app
     @Published public var isNeedToShowList: Bool = false
 
-    public init(container: GetFeatureViewModelsProtocol) {
+    public init(container: ToDoFeatureViewModelsProtocol) {
         self.container = container
         Logger.core.info("\(String.logHeader()) Started")
     }
@@ -53,7 +53,7 @@ public extension AppCoordinator {
             ToDoDetailScreen(vm: container.makeToDoDetailViewModel())
 
         case let .toDoDetail(model: model):
-            ToDoDetailScreen(vm: container.makeToDoDetailViewModel(), model: model)
+            ToDoDetailScreen(vm: container.makeToDoDetailViewModel(toDo: model))
         }
     }
 }

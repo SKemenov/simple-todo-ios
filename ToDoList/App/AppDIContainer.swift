@@ -1,5 +1,4 @@
 import Foundation
-import Combine
 import DataInterface
 import DomainInterface
 import LocalStores
@@ -10,8 +9,13 @@ import ToDoFeature
 import Logging
 import Utilities
 
-final class DependencyContainer {
-    init() {
+final class AppDIContainer {
+    private let errorManager: ErrorManager
+    private let networkState: NetworkState
+
+    init(errorManager: ErrorManager, networkState: NetworkState) {
+        self.errorManager = errorManager
+        self.networkState = networkState
         Logger.core.info("\(String.logHeader()) Container started")
     }
 
@@ -19,27 +23,26 @@ final class DependencyContainer {
         Logger.core.info("\(String.logHeader()) Container deinited")
     }
 
-    // MARK: - Public properties
+    // MARK: - Data layer
     public lazy var persistenceController: PersistenceController = {
         Logger.core.info("\(String.logHeader()) Requesting persistenceController")
         return PersistenceController.shared
     }()
 
-    public lazy var userDefaultsDataSource: UserDefaultsDataSourceProtocol = {
+    private lazy var userDefaultsDataSource: UserDefaultsDataSourceProtocol = {
         Logger.core.info("\(String.logHeader()) Requesting userDefaultsDataSource")
         return UserDefaultsDataSource()
     }()
 
-    // MARK: - Private properties
-    public lazy var toDoRemoteDataSource: ToDoRemoteDataSourceProtocol = {
+    private lazy var toDoRemoteDataSource: ToDoRemoteDataSourceProtocol = {
         ToDoRemoteDataSource()
     }()
 
-    public lazy var toDoLocalDataSource: ToDoLocalDataSourceProtocol = {
+    private lazy var toDoLocalDataSource: ToDoLocalDataSourceProtocol = {
         CoreDataToDoLocalDataSource(persistence: persistenceController)
     }()
 
-    public lazy var toDoRepository: ToDoRepositoryProtocol = {
+    private lazy var toDoRepository: ToDoRepositoryProtocol = {
         ToDoRepository(
             remoteDataSource: toDoRemoteDataSource,
             localDataSource: toDoLocalDataSource,
@@ -67,32 +70,39 @@ final class DependencyContainer {
         GetAllToDosUseCase(repository: toDoRepository)
     }()
 
-    private lazy var getClearCacheToDoUseCase: ClearCacheToDoUseCaseProtocol = {
+    private lazy var clearCacheToDoUseCase: ClearCacheToDoUseCaseProtocol = {
         ClearCacheToDoUseCase(repository: toDoRepository)
     }()
 }
 
 // MARK: - GetFeatureViewModelsProtocol
-extension DependencyContainer: GetFeatureViewModelsProtocol {
+extension AppDIContainer: ToDoFeatureViewModelsProtocol {
     func makeToDoListViewModel() -> ToDoListViewModel {
         .init(
             getAllToDosUseCase: getAllToDosUseCase,
             deleteToDoUseCase: deleteToDoUseCase,
-            completeToDoUseCase: completeToDoUseCase
+            completeToDoUseCase: completeToDoUseCase,
+            errorManager: errorManager,
+            networkState: networkState
         )
     }
 
-    func makeToDoDetailViewModel() -> ToDoDetailViewModel {
+    func makeToDoDetailViewModel(toDo: UIModel.ToDo?) -> ToDoDetailViewModel {
         .init(
             createUseCase: createToDoUseCase,
-            updateUseCase: updateToDoUseCase
+            updateUseCase: updateToDoUseCase,
+            toDo: toDo,
+            errorManager: errorManager,
+            networkState: networkState
         )
     }
 
     func makeRootViewModel() -> RootViewModel {
         .init(
             getAllToDosUseCase: getAllToDosUseCase,
-            clearCacheToDoUseCase: getClearCacheToDoUseCase,
+            clearCacheToDoUseCase: clearCacheToDoUseCase,
+            errorManager: errorManager,
+            networkState: networkState
         )
     }
 }

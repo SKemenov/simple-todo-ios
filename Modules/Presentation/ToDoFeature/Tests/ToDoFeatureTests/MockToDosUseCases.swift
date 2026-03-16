@@ -22,10 +22,12 @@ class MockGetAllToDosUseCase: GetAllToDosUseCaseProtocol {
 
 class MockCreateToDoUseCase: CreateToDoUseCaseProtocol {
     var callCount = 0
+    var shouldThrow = false
     var lastTitle: String?
     var lastDescription: String?
 
     func execute(title: String, description: String) async throws {
+        if shouldThrow { throw NSError(domain: "TestError", code: -1) }
         callCount += 1
         lastTitle = title
         lastDescription = description
@@ -34,11 +36,13 @@ class MockCreateToDoUseCase: CreateToDoUseCaseProtocol {
 
 class MockUpdateToDoUseCase: UpdateToDoUseCaseProtocol {
     var callCount = 0
+    var shouldThrow = false
     var lastId: UUID?
     var lastTitle: String?
     var lastDescription: String?
 
     func execute(id: UUID, title: String, description: String) async throws {
+        if shouldThrow { throw NSError(domain: "TestError", code: -1) }
         callCount += 1
         lastId = id
         lastTitle = title

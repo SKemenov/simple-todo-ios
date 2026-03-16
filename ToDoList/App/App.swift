@@ -18,18 +18,19 @@ import LocalStores
 
 @main
 struct ToDoListApp: App {
-    
-    private let dependencyContainer: DependencyContainer
-    
-    private let persistence: PersistenceController
-    
+    private let container: AppDIContainer
     @StateObject private var coordinator: AppCoordinator
+    @StateObject private var errorManager: ErrorManager
+    @StateObject private var networkState: NetworkState
 
     init () {
-        let container = DependencyContainer()
-        dependencyContainer = container
-        _coordinator = StateObject(wrappedValue: AppCoordinator(container: container))
-        persistence = container.persistenceController
+        let errors = ErrorManager()
+        let networkState = NetworkState()
+        let appDIContainer = AppDIContainer(errorManager: errors, networkState: networkState)
+        container = appDIContainer
+        _coordinator = StateObject(wrappedValue: AppCoordinator(container: appDIContainer))
+        _errorManager = StateObject(wrappedValue: errors)
+        _networkState = StateObject(wrappedValue: networkState)
         Logger.core.info("\(String.logHeader()) App started")
     }
 
@@ -37,6 +38,8 @@ struct ToDoListApp: App {
         WindowGroup {
             AppCoordinatorView()
                 .environmentObject(coordinator)
+                .environmentObject(errorManager)
+                .environmentObject(networkState)
                 .preferredColorScheme(.dark)
                 .onAppear {
                     UIView.appearance().tintColor = UIColor(Color.designSystem(.text(.accent)))

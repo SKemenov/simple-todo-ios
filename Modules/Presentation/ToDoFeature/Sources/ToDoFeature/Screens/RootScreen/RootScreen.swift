@@ -64,15 +64,15 @@ private extension RootScreen {
 }
 #if DEBUG
 #Preview("Root - Russian") {
-    RootScreen(vm: UIMockDependencyContainer().makeRootViewModel())
-        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+    RootScreen(vm: UIMockAppDIContainer().makeRootViewModel())
+        .environmentObject(AppCoordinator(container: UIMockAppDIContainer()))
         .preferredColorScheme(.dark)
         .environment(\.locale, Locale(identifier: "RU"))
 }
 
 #Preview("Root - English") {
-    RootScreen(vm: UIMockDependencyContainer().makeRootViewModel())
-        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
+    RootScreen(vm: UIMockAppDIContainer().makeRootViewModel())
+        .environmentObject(AppCoordinator(container: UIMockAppDIContainer()))
         .preferredColorScheme(.dark)
         .environment(\.locale, Locale(identifier: "EN"))
 }

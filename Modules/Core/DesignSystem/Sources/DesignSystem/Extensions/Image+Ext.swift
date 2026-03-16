@@ -45,6 +45,12 @@ extension Image.DS.Icons: CaseIterable {
     /// SF symbol for "exclamationmark.triangle"
     public static let warning = Image(systemName: .DS.Icons.warning)
 
+    /// SF symbol for "externaldrive.trianglebadge.exclamationmark"
+    public static let storage = Image(systemName: .DS.Icons.storage)
+
+    /// SF symbol for "wifi.exclamationmark"
+    public static let network = Image(systemName: .DS.Icons.network)
+
     /// SF symbol for "doc.text"
     public static let empty = Image(systemName: .DS.Icons.empty)
 

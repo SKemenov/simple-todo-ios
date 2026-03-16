@@ -18,22 +18,26 @@ struct ToDoListViewModelTests {
     private func makeViewModel(
         getAll: GetAllToDosUseCaseProtocol = MockGetAllToDosUseCase(),
         delete: DeleteToDoUseCaseProtocol = MockDeleteToDoUseCase(),
-        complete: CompleteToDoUseCaseProtocol = MockCompleteToDoUseCase()
-    ) -> ToDoListViewModel {
-        ToDoListViewModel(
+        complete: CompleteToDoUseCaseProtocol = MockCompleteToDoUseCase(),
+        errorManager: ErrorManager = ErrorManager(),
+        networkState: NetworkState = NetworkState()
+    ) -> (ToDoListViewModel, ErrorManager, NetworkState) {
+        let vm = ToDoListViewModel(
             getAllToDosUseCase: getAll,
             deleteToDoUseCase: delete,
-            completeToDoUseCase: complete
+            completeToDoUseCase: complete,
+            errorManager: errorManager,
+            networkState: networkState
         )
+        return (vm, errorManager, networkState)
     }
 
     @Test("Initial state – loading = false, todos empty")
     func initialState() {
-        let sut = makeViewModel()
-        #expect(true)
-        #expect(sut.isLoading == false)
+        let (sut, errorManager, networkState) = makeViewModel()
+        #expect(networkState.isLoading == false)
         #expect(sut.todos.isEmpty)
-        #expect(sut.errorMessage == nil)
+        #expect(errorManager.errors.isEmpty)
     }
 
     @Test("fetchTodos succeeds – populates list & stops loading")
@@ -43,34 +47,34 @@ struct ToDoListViewModelTests {
             DomainModel.ToDo(id: UUID(), todoTitle: "Buy milk", isCompleted: false),
             DomainModel.ToDo(id: UUID(), todoTitle: "Call mom", isCompleted: true)
         ]
-        
-        let sut = makeViewModel(getAll: mockGetAll)
+
+        let (sut, errorManager, networkState) = makeViewModel(getAll: mockGetAll)
         await sut.loadData()
 
-        #expect(sut.isLoading == false)
+        #expect(networkState.isLoading == false)
         #expect(sut.todos.count == 2)
         #expect(sut.todos[0].title == "Buy milk")
-        #expect(sut.errorMessage == nil)
+        #expect(errorManager.errors.isEmpty)
     }
 
-    @Test("fetchTodos fails – shows error, keeps loading false")
-    func fetchFailsShowsError() async throws {
+    @Test("fetchTodos fails – pushes error to ErrorManager")
+    func fetchFailsPushesError() async throws {
         let failingUseCase = MockGetAllToDosUseCase()
         failingUseCase.shouldThrow = true
 
-        let sut = makeViewModel(getAll: failingUseCase)
+        let (sut, errorManager, networkState) = makeViewModel(getAll: failingUseCase)
         await sut.loadData()
 
-        #expect(sut.isLoading == false)
+        #expect(networkState.isLoading == false)
         #expect(sut.todos.isEmpty)
-        #expect(sut.errorMessage != nil)  // adjust to your exact property name
+        #expect(!errorManager.errors.isEmpty)
     }
 
     @Test("toggleComplete calls use case & updates local state optimistically")
     func toggleCompleteOptimisticUpdate() async throws {
         let mockComplete = MockCompleteToDoUseCase()
-        let sut = makeViewModel(complete: mockComplete)
-        
+        let (sut, _, _) = makeViewModel(complete: mockComplete)
+
         let todoId = UUID()
         let todo = UIModel.ToDo(id: todoId, title: "Task", description: "", createAt: "", isCompleted: false)
         sut.todos = [todo]
@@ -85,8 +89,8 @@ struct ToDoListViewModelTests {
     @Test("delete removes item from list & calls use case")
     func deleteRemovesItem() async throws {
         let mockDelete = MockDeleteToDoUseCase()
-        let sut = makeViewModel(delete: mockDelete)
-        
+        let (sut, _, _) = makeViewModel(delete: mockDelete)
+
         let todoId = UUID()
         sut.todos = [
             UIModel.ToDo(id: todoId, title: "Delete me", description: "", createAt: "", isCompleted: false),
