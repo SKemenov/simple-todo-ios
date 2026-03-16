@@ -11,7 +11,6 @@ import DesignSystem
 public struct ToDoListScreen: View {
     @EnvironmentObject private var coordinator: AppCoordinator
     @StateObject private var vm: ToDoListViewModel
-    @State private var cardSizes: [UUID: CGSize] = [:]
 
     public init(vm: ToDoListViewModel) {
         _vm = StateObject(wrappedValue: vm)
@@ -30,9 +29,6 @@ public struct ToDoListScreen: View {
         .overlay { noTodos }
         .overlay(alignment: .bottom) { footer }
         .background(.designSystem(.background(.primary)))
-        .overlay { progress }
-        .overlay { errorView }
-        .onPreferenceChange(SizePreferenceKey.self) { cardSizes = $0 }
         .task {
             await vm.loadData()
         }
@@ -49,12 +45,8 @@ private extension ToDoListScreen {
                 ForEach(vm.filteredTodos) { toDo in
                     ToDoCard(toDo, isLast: toDo == vm.filteredTodos.last) {
                         Task { try await vm.completeToDo(toDo) }
-                    }
-                    .background { backgroundGeometryReader(for: toDo.id) }
-                    .contextMenu {
-                        contextMenu(for: toDo)
-                    } preview: {
-                        preview(for: toDo)
+                    } onDelete: {
+                        Task { try await vm.deleteToDo(id: toDo.id) }
                     }
                 }
             }
@@ -63,14 +55,13 @@ private extension ToDoListScreen {
         .background(.designSystem(.background(.primary)))
     }
 
-    var footer: some View {
+    @ViewBuilder var footer: some View {
         ListFooter(counter: vm.todosCount) {
             coordinator.push(page: .createToDo)
         }
     }
 
-    @ViewBuilder
-    var noTodos: some View {
+    @ViewBuilder var noTodos: some View {
         if vm.isTodosEmpty {
             DSEmptyState()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -78,86 +69,31 @@ private extension ToDoListScreen {
         }
     }
 
-    @ViewBuilder
-    var noFilteredTodos: some View {
+    @ViewBuilder var noFilteredTodos: some View {
         if vm.isFilteredTodosEmpty {
             DSEmptyState(isSearch: true)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.designSystem(.background(.primary)))
         }
     }
-
-    @ViewBuilder
-    var progress: some View {
-        if vm.isLoading {
-            ProgressView()
-        }
-    }
-
-    @ViewBuilder
-    var errorView: some View {
-        if let error = vm.errorMessage {
-            DSError(message: error) {
-                Task { await vm.loadData() }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.designSystem(.background(.primary)))
-        }
-    }
-
-    func backgroundGeometryReader(for id: UUID) -> some View {
-        GeometryReader { proxy in
-            Color.clear
-                .preference(
-                    key: SizePreferenceKey.self,
-                    value: [id: proxy.size]
-                )
-        }
-    }
-
-    @ViewBuilder
-    func contextMenu(for toDo: UIModel.ToDo) -> some View {
-        Button(.globalEdit, systemImage: .DS.Icons.edit) {
-            coordinator.push(page: .toDoDetail(model: toDo))
-        }
-        ShareLink(.globalShare, item: vm.exportToDo(toDo))
-        Button(.globalDelete, systemImage: .DS.Icons.delete, role: .destructive) {
-            Task { try await vm.deleteToDo(id: toDo.id) }
-        }
-    }
-
-    @ViewBuilder
-    func preview(for toDo: UIModel.ToDo) -> some View {
-        let previewSize = cardSizes[toDo.id] ?? CGSize(width: 400, height: 50)
-        ToDoCardDetail(toDo)
-            .padding(.horizontal, .DS.Spacing.xLarge)
-            .padding(.vertical, .DS.Spacing.large)
-            .frame(width: previewSize.width, height: previewSize.height)
-            .background(.designSystem(.background(.secondary)))
-    }
-}
-
-// MARK: - Helpers
-struct SizePreferenceKey: PreferenceKey {
-    static var defaultValue: [UUID: CGSize] = [:]
-
-    static func reduce(value: inout [UUID: CGSize], nextValue: () -> [UUID: CGSize]) {
-        value.merge(nextValue()) { $1 }
-    }
 }
 
 #if DEBUG
 #Preview("ToDo List - Russian") {
-    ToDoListScreen(vm: UIMockDependencyContainer().makeToDoListViewModel())
-        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
-        .preferredColorScheme(.dark)
-        .environment(\.locale, Locale(identifier: "RU"))
+    NavigationStack {
+        ToDoListScreen(vm: UIMockAppDIContainer().makeToDoListViewModel())
+            .environmentObject(AppCoordinator(container: UIMockAppDIContainer()))
+            .preferredColorScheme(.dark)
+            .environment(\.locale, Locale(identifier: "RU"))
+    }
 }
 
 #Preview("ToDo List - English") {
-    ToDoListScreen(vm: UIMockDependencyContainer().makeToDoListViewModel())
-        .environmentObject(AppCoordinator(container: UIMockDependencyContainer()))
-        .preferredColorScheme(.dark)
-        .environment(\.locale, Locale(identifier: "EN"))
+    NavigationStack {
+        ToDoListScreen(vm: UIMockAppDIContainer().makeToDoListViewModel())
+            .environmentObject(AppCoordinator(container: UIMockAppDIContainer()))
+            .preferredColorScheme(.dark)
+            .environment(\.locale, Locale(identifier: "EN"))
+    }
 }
 #endif

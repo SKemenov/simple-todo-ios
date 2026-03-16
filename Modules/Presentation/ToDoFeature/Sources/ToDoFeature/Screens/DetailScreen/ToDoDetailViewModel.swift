@@ -14,9 +14,8 @@ import Logging
 
 public final class ToDoDetailViewModel: ObservableObject {
     @Published var toDo: UIModel.ToDo?
-    @Published var isLoading = false
+//    @Published var isLoading = false
     @Published var isSaving = false
-    @Published var errorMessage: String?
     @Published var title: String = ""
     @Published var description: String = ""
     @Published var createdAt: String = Current.date().createDateStamp()
@@ -31,15 +30,21 @@ public final class ToDoDetailViewModel: ObservableObject {
 
     private let createUseCase: CreateToDoUseCaseProtocol
     private let updateUseCase: UpdateToDoUseCaseProtocol
+    private let errorManager: ErrorManager
+    private let networkState: NetworkState
 
     public init(
         createUseCase: CreateToDoUseCaseProtocol,
         updateUseCase: UpdateToDoUseCaseProtocol,
-        toDo: UIModel.ToDo? = nil
+        toDo: UIModel.ToDo? = nil,
+        errorManager: ErrorManager,
+        networkState: NetworkState
     ) {
         self.createUseCase = createUseCase
         self.updateUseCase = updateUseCase
         self.toDo = toDo
+        self.errorManager = errorManager
+        self.networkState = networkState
     }
 
     @MainActor
@@ -56,10 +61,9 @@ public final class ToDoDetailViewModel: ObservableObject {
         guard !isSaving else { return }
         Logger.userFlow.info("\(String.logHeader()) saving...")
         isSaving = true
-        isLoading = true
-        errorMessage = nil
+        networkState.set(true, for: String.logHeader())
         defer {
-            isLoading = false
+            networkState.set(false, for: String.logHeader())
             isSaving = false
         }
 
@@ -68,25 +72,26 @@ public final class ToDoDetailViewModel: ObservableObject {
             do {
                 try await updateToDo(id: toDo.id)
             } catch {
+                errorManager.show("Failed to update todo.", kind: .init(from: error))
                 Logger.userFlow.error("\(String.logHeader()) Updating error: \(error)")
             }
         } else {
             do {
                 try await createToDo()
             } catch {
-                errorMessage = "Failed to create todo."
+                errorManager.show("Failed to create todo.", kind: .init(from: error))
                 Logger.userFlow.error("\(String.logHeader()) Creating error: \(error)")
             }
         }
     }
 
-    nonisolated
+    @MainActor
     func createToDo() async throws {
         try await createUseCase.execute(title: title, description: description)
         Logger.userFlow.info("\(String.logHeader()) Created toDo with title [\(self.title)]")
     }
 
-    nonisolated
+    @MainActor
     func updateToDo(id: UUID) async throws {
         try await updateUseCase.execute(id: id, title: title, description: description)
         Logger.userFlow.info("\(String.logHeader()) Updated toDo with id [\(id)]")

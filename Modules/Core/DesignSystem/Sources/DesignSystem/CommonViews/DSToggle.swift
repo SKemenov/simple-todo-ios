@@ -9,7 +9,6 @@ import SwiftUI
 
 public struct DSToggle: View, Equatable {
     private var isSelected: Bool
-//    @Environment(\.isEnabled) private var isEnabled
 
     public init(isSelected: Bool) {
         self.isSelected = isSelected
@@ -25,9 +24,6 @@ public struct DSToggle: View, Equatable {
                 .opacity(isSelected ? 1 : 0)
                 .scaleEffect(isSelected ? 1 : 0.5)
                 .animation(.spring(response: 0.5, dampingFraction: 0.6), value: isSelected)
-            disabledLayer
-                .opacity(!isEnabled ? 0.25 : 0)
-                .animation(.spring(response: 0.5, dampingFraction: 0.6), value: isEnabled)
         }
         .background(.designSystem(.background(.primary)))
     }
@@ -68,14 +64,6 @@ private extension DSToggle {
             DSToggle(isSelected: true)
         })
         .padding(.bottom)
-
-//        DSRow(leading: { Text("not selected, disabled") }, trailing: {
-//            DSToggle(isSelected: false).disabled(true)
-//        })
-//
-//        DSRow(leading: { Text("selected, disabled") }, trailing: {
-//            DSToggle(isSelected: true).disabled(true)
-//        })
     }
     .padding()
     .background(.designSystem(.background(.primary)))

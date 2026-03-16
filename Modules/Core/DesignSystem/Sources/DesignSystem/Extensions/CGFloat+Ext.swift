@@ -74,4 +74,7 @@ extension CGFloat.DS.Radiuses {
 extension CGFloat.DS.Borders {
     /// CGFloat: 1.0
     public static let small: CGFloat = 1
+
+    /// CGFloat: 3.0
+    public static let large: CGFloat = 4
 }
