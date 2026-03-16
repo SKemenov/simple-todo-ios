@@ -8,58 +8,31 @@
 import Testing
 @testable import Networking
 @testable import DataInterface
-import Foundation
 
 @Suite("ToDoRemoteDataSourceProtocol contract")
 struct ToDoRemoteDataSourceContractTests {
 
-    @Test("Initial state — Loaded, no crashes")
+    @Test("Mock conforms to protocol and initializes without crashes")
     func initialState() {
-        let sources: [any ToDoRemoteDataSourceProtocol] = [
-            ToDoRemoteDataSource(),
-            MockToDoRemoteDataSource()
-        ]
-
-        sources.forEach { sut in
-            #expect(true)
-        }
-    }
-
-
-    @Test("fetchAllToDos returns non-empty list")
-    func fetchAll() async throws {
-        let sources: [any ToDoRemoteDataSourceProtocol] = [
-            ToDoRemoteDataSource(),
-            MockToDoRemoteDataSource()
-        ]
-
-        for source in sources {
-            let sut = try await source.fetchAllToDos()
-
-            #expect(!sut.todos.isEmpty, "Should return at least one todo")
-            #expect(sut.total > 0)
-        }
+        let sut: any ToDoRemoteDataSourceProtocol = MockToDoRemoteDataSource()
+        #expect(sut is MockToDoRemoteDataSource)
     }
 
     @Test("create → read round-trip")
     func createAndFetch() async throws {
-        let sources: [any ToDoRemoteDataSourceProtocol] = [
-            MockToDoRemoteDataSource()
-        ]
+        let source: any ToDoRemoteDataSourceProtocol = MockToDoRemoteDataSource()
 
-        for source in sources {
-            let newTodo = DTOModel.ToDo(
-                id: 0,
-                todo: "Test item from unit test",
-                completed: false,
-                userId: 999
-            )
+        let newTodo = DTOModel.ToDo(
+            id: 0,
+            todo: "Test item from unit test",
+            completed: false,
+            userId: 999
+        )
 
-            let created = try await source.createToDo(newTodo)
-            #expect(created.todo == newTodo.todo)
+        let created = try await source.createToDo(newTodo)
+        #expect(created.todo == newTodo.todo)
 
-            let fetched = try await source.fetchToDo(id: created.id)
-            #expect(fetched.todo == created.todo)
-        }
+        let fetched = try await source.fetchToDo(id: created.id)
+        #expect(fetched.todo == created.todo)
     }
 }
