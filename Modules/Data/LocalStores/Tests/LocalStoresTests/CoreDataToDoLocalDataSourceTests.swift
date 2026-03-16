@@ -101,7 +101,7 @@ struct CoreDataToDoLocalDataSourceTests {
         }
 
         try await sut.syncAllTodos(dtos)
-        
+
         #expect(try await countOfTodos() == initialCount + addedCount)
     }
 }
