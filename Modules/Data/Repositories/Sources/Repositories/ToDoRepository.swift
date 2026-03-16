@@ -48,7 +48,7 @@ public final class ToDoRepository: ToDoRepositoryProtocol {
             todos = try await localDataSource.fetchAllToDos()
             userDefaults.isCoreDataSynced = true
         }
-//        try await Task.sleep(for: .seconds(5.0)) // for ProgressView
+                try await Task.sleep(for: .seconds(2.0)) // for ProgressView
         Logger.repos.debug("\(String.logHeader()) fetched [\(todos.count)] records")
         return todos
     }

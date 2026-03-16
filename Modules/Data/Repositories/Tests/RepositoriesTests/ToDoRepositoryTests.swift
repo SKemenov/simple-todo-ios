@@ -53,7 +53,7 @@ struct ToDoRepositoryTests {
 
         try await sut.createToDo(newToDo)
         let saved = try await mockLocal.fetchAllToDos()
-        #expect(!saved.filter { $0.id == newToDo.id}.isEmpty)
+        #expect(!saved.filter { $0.id == newToDo.id }.isEmpty)
         #expect(saved.count == initial.count + 1)
     }
 
@@ -70,7 +70,7 @@ struct ToDoRepositoryTests {
         let fetched = try await sut.fetchAllToDos()
         #expect(mockDefaults.isAppAlreadyHasFirstLaunch == true)
         #expect(mockDefaults.isCoreDataSynced == false)
-        #expect(fetched.count == 0)
+        #expect(fetched.isEmpty)
     }
 
     @Test("fetchAllToDos syncs from remote when not synced, sets flag")
