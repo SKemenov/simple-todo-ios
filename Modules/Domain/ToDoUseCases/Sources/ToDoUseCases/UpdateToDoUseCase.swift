@@ -23,10 +23,6 @@ public final class UpdateToDoUseCase: UpdateToDoUseCaseProtocol {
         guard !checkedTitle.isEmpty, !checkedDescription.isEmpty else {
             return // Nothing to update
         }
-        if checkedTitle.isEmpty {
-            checkedTitle = checkedDescription
-            checkedDescription = ""
-        }
         let oldToDo = try await repository.getToDo(id: id)
         let toDo: DomainModel.ToDo
         if let oldToDo {

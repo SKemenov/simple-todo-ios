@@ -15,7 +15,6 @@ let package = Package(
     dependencies: [
         .package(path: "../../Core/Logging"),
         .package(path: "../../Core/Utilities"),
-        .package(path: "../../Domain/DomainInterface"),
         .package(path: "../DataInterface"),
     ],
     targets: [
@@ -24,7 +23,6 @@ let package = Package(
             dependencies: [
                 "Logging",
                 "Utilities",
-                "DomainInterface",
                 "DataInterface",
             ],
             path: "Sources/Networking",
@@ -32,6 +30,11 @@ let package = Package(
         .testTarget(
             name: "NetworkingTests",
             dependencies: ["Networking"]
+        ),
+        .testTarget(
+            name: "NetworkingIntegrationTests",
+            dependencies: ["Networking"],
+            path: "Tests/NetworkingIntegrationTests"
         ),
     ]
 )
