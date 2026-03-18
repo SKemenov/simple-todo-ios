@@ -17,14 +17,8 @@ public struct DSEmptyState: View {
     public var body: some View {
         VStack(spacing: .DS.Spacing.xLarge) {
             icon
-
             title
-
-            if isSearch {
-                searchDesc
-            } else {
-                emptyDesc
-            }
+            subTitle
         }
         .padding()
         .padding(.bottom, .DS.Sizes.footer)
@@ -45,19 +39,12 @@ private extension DSEmptyState {
             .foregroundColor(.designSystem(.text(.primary)))
     }
 
-    var emptyDesc: some View {
-        HStack(spacing: .DS.Spacing.xxSmall) {
-            Text(.globalTap)
-            Image.DS.Icons.create.foregroundColor(.designSystem(.text(.accent)))
-            Text(.dsEmptyStateDescription)
+    var subTitle: some View {
+        Group {
+            isSearch
+                ? Text(.dsEmptySearchDescription)
+                : Text(stateDescKey, bundle: .module) // LocalizedStringKey, exception
         }
-        .font(.designSystem(.body))
-        .foregroundColor(.designSystem(.text(.secondary)))
-        .multilineTextAlignment(.center)
-    }
-
-    var searchDesc: some View {
-        Text(.dsEmptySearchDescription)
             .font(.designSystem(.body))
             .foregroundColor(.designSystem(.text(.secondary)))
             .multilineTextAlignment(.center)
