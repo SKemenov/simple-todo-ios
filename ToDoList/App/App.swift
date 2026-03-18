@@ -15,6 +15,7 @@ import LocalStores
 
 @main
 struct ToDoListApp: App {
+    
     private let dependencyContainer: DependencyContainer
     private let persistence: PersistenceController
     @StateObject private var coordinator: AppCoordinator
