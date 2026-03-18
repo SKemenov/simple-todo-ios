@@ -62,6 +62,20 @@ private extension DSEmptyState {
             .foregroundColor(.designSystem(.text(.secondary)))
             .multilineTextAlignment(.center)
     }
+
+    /// Use LocalizedStringKey instead of LocalizedStringResource to correctly wrap SF symbol in this sentence
+    var stateDescKey: LocalizedStringKey {
+        "dsEmptyStateDesc\(symbol)"
+    }
+
+    /// Wrap Image into Text to apply style
+    var symbol: Text {
+        Text(
+            Image(systemName: .DS.Icons.create)
+        )
+        .font(.designSystem(.headline))
+        .foregroundColor(.designSystem(.text(.accent)))
+    }
 }
 
 #Preview("Empty State - English") {
