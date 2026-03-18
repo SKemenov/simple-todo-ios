@@ -35,23 +35,6 @@
         }
       }
     },
-    "dsEmpty StateDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "button to create your first ToDo"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "чтобы создать Задачу"
-          }
-        }
-      }
-    },
     "dsEmpty StateTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -69,6 +52,22 @@
         }
       }
     },
+    "dsEmptyStateDesc%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap the %@ button to create your first ToDo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите %@ чтобы создать вашу первую Задачу"
+          }
+        }
+      }
+    },
     "global Retry" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -82,23 +81,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Повторить"
-          }
-        }
-      }
-    },
-    "global Tap" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap the"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Нажмите"
           }
         }
       }
